@@ -50,6 +50,7 @@ module.exports = {
     }
   },
   rules: {
+    "linebreak-style": ["error", "windows"],
     "vue/no-v-html": "off",
     "vue/require-default-prop": "off",
     "vue/require-explicit-emits": "off",
