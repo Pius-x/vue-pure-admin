@@ -20,9 +20,7 @@ let dataProps = {
   <el-card>
     <template #header>
       <div class="card-header">
-        <span class="font-medium">
-          扩展elemenet-plus的树形组件包括虚拟树组件，支持连接线
-        </span>
+        <span class="font-medium"> 扩展elemenet-plus的树形组件包括虚拟树组件，支持连接线 </span>
       </div>
     </template>
 
@@ -70,12 +68,7 @@ let dataProps = {
               :default-expanded-keys="expandedKeys"
             >
               <template v-slot:default="{ node }">
-                <el-tree-line
-                  :node="node"
-                  :treeData="menusData"
-                  :showLabelLine="true"
-                  :indent="30"
-                >
+                <el-tree-line :node="node" :treeData="menusData" :showLabelLine="true" :indent="30">
                   <template v-slot:node-label>
                     <span class="text-sm">{{ t(node.data.meta.title) }}</span>
                   </template>

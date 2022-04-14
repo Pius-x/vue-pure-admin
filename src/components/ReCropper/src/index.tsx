@@ -1,13 +1,5 @@
 import type { CSSProperties } from "vue";
-import {
-  defineComponent,
-  onMounted,
-  nextTick,
-  ref,
-  unref,
-  computed,
-  PropType
-} from "vue";
+import { defineComponent, onMounted, nextTick, ref, unref, computed, PropType } from "vue";
 import { templateRef } from "@vueuse/core";
 import { useAttrs } from "/@/utils/useAttrs";
 
@@ -131,10 +123,7 @@ export default defineComponent({
   render() {
     return (
       <>
-        <div
-          class={useAttrs({ excludeListeners: true, excludeKeys: ["class"] })}
-          style={this.getWrapperStyle}
-        >
+        <div class={useAttrs({ excludeListeners: true, excludeKeys: ["class"] })} style={this.getWrapperStyle}>
           <img
             ref="imgElRef"
             src={this.props.src}

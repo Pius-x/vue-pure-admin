@@ -1,12 +1,7 @@
 <script setup lang="ts">
 import { computed, ref, unref, nextTick } from "vue";
 import type { CSSProperties, PropType } from "vue";
-import {
-  tryOnMounted,
-  tryOnUnmounted,
-  templateRef,
-  useDebounceFn
-} from "@vueuse/core";
+import { tryOnMounted, tryOnUnmounted, templateRef, useDebounceFn } from "@vueuse/core";
 import * as utilsMethods from "./utils";
 const { animationFrame, copyObj } = utilsMethods;
 animationFrame();
@@ -55,14 +50,8 @@ if (classOption["key"] === undefined) {
 }
 
 const wrap = templateRef<HTMLElement | null>(`wrap${classOption["key"]}`, null);
-const slotList = templateRef<HTMLElement | null>(
-  `slotList${classOption["key"]}`,
-  null
-);
-const realBox = templateRef<HTMLElement | null>(
-  `realBox${classOption["key"]}`,
-  null
-);
+const slotList = templateRef<HTMLElement | null>(`slotList${classOption["key"]}`, null);
+const realBox = templateRef<HTMLElement | null>(`realBox${classOption["key"]}`, null);
 
 let leftSwitchState = computed(() => {
   return unref(xPos) < 0;
@@ -125,23 +114,17 @@ let leftSwitch = computed((): CSSProperties => {
 let rightSwitch = computed((): CSSProperties => {
   return {
     position: "absolute",
-    margin: `${unref(height) / 2}px 0 0 ${
-      unref(width) + unref(options).switchOffset
-    }px`,
+    margin: `${unref(height) / 2}px 0 0 ${unref(width) + unref(options).switchOffset}px`,
     transform: "translateY(-50%)"
   };
 });
 
 let isHorizontal = computed(() => {
-  return (
-    unref(options).direction !== "bottom" && unref(options).direction !== "top"
-  );
+  return unref(options).direction !== "bottom" && unref(options).direction !== "top";
 });
 
 let float = computed((): CSSProperties => {
-  return unref(isHorizontal)
-    ? { float: "left", overflow: "hidden" }
-    : { overflow: "hidden" };
+  return unref(isHorizontal) ? { float: "left", overflow: "hidden" } : { overflow: "hidden" };
 });
 
 let pos = computed(() => {
@@ -222,10 +205,7 @@ function leftSwitchClick() {
 function rightSwitchClick() {
   if (!unref(rightSwitchState)) return;
   // 小于单步距离
-  if (
-    unref(realBoxWidth) - unref(width) + unref(xPos) <
-    unref(options).switchSingleStep
-  ) {
+  if (unref(realBoxWidth) - unref(width) + unref(xPos) < unref(options).switchSingleStep) {
     xPos.value = unref(width) - unref(realBoxWidth);
     return;
   }
@@ -263,12 +243,7 @@ function touchStart(e) {
 
 function touchMove(e) {
   //当屏幕有多个touch或者页面被缩放过，就不执行move操作
-  if (
-    !unref(canTouchScroll) ||
-    e.targetTouches.length > 1 ||
-    (e.scale && e.scale !== 1)
-  )
-    return;
+  if (!unref(canTouchScroll) || e.targetTouches.length > 1 || (e.scale && e.scale !== 1)) return;
   const touch = e.targetTouches[0];
   const { direction } = unref(options);
   let endPos = {
@@ -279,16 +254,10 @@ function touchMove(e) {
   e.preventDefault();
   //dir，1表示纵向滑动，0为横向滑动
   const dir = Math.abs(endPos.x) < Math.abs(endPos.y) ? 1 : 0;
-  if (
-    (dir === 1 && direction === "bottom") ||
-    (dir === 1 && direction === "top")
-  ) {
+  if ((dir === 1 && direction === "bottom") || (dir === 1 && direction === "top")) {
     // 表示纵向滑动 && 运动方向为上下
     yPos.value = startPosY + endPos.y;
-  } else if (
-    (dir === 0 && direction === "left") ||
-    (dir === 0 && direction === "right")
-  ) {
+  } else if ((dir === 0 && direction === "left") || (dir === 0 && direction === "right")) {
     // 为横向滑动 && 运动方向为左右
     xPos.value = startPosX + endPos.x;
   }
@@ -451,11 +420,7 @@ function scrollStopMove() {
 // 鼠标滚轮事件
 function wheel(e) {
   e.preventDefault();
-  if (
-    unref(options).direction === "left" ||
-    unref(options).direction === "right"
-  )
-    return;
+  if (unref(options).direction === "left" || unref(options).direction === "right") return;
   useDebounceFn(() => {
     e.deltaY > 0 ? (yPos.value -= step.value) : (yPos.value += step.value);
   }, 50)();
@@ -492,20 +457,10 @@ defineExpose({
 
 <template>
   <div :ref="'wrap' + classOption['key']">
-    <div
-      :style="leftSwitch"
-      v-if="navigation"
-      :class="leftSwitchClass"
-      @click="leftSwitchClick"
-    >
+    <div :style="leftSwitch" v-if="navigation" :class="leftSwitchClass" @click="leftSwitchClick">
       <slot name="left-switch" />
     </div>
-    <div
-      :style="rightSwitch"
-      v-if="navigation"
-      :class="rightSwitchClass"
-      @click="rightSwitchClick"
-    >
+    <div :style="rightSwitch" v-if="navigation" :class="rightSwitchClass" @click="rightSwitchClick">
       <slot name="right-switch" />
     </div>
     <div

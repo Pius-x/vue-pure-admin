@@ -6,11 +6,8 @@ import { storageLocal } from "/@/utils/storage";
 export const useEpThemeStore = defineStore({
   id: "pure-epTheme",
   state: () => ({
-    epThemeColor:
-      storageLocal.getItem("responsive-layout")?.epThemeColor ??
-      getConfig().EpThemeColor,
-    epTheme:
-      storageLocal.getItem("responsive-layout")?.theme ?? getConfig().Theme
+    epThemeColor: storageLocal.getItem("responsive-layout")?.epThemeColor ?? getConfig().EpThemeColor,
+    epTheme: storageLocal.getItem("responsive-layout")?.theme ?? getConfig().Theme
   }),
   getters: {
     getEpThemeColor() {

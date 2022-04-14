@@ -166,12 +166,7 @@ export default [
       if (query.name === "admin") {
         return {
           code: 0,
-          info: [
-            tabsRouter,
-            frameRouter,
-            systemRouter,
-            setDifAuthority("v-admin", permissionRouter)
-          ]
+          info: [tabsRouter, frameRouter, systemRouter, setDifAuthority("v-admin", permissionRouter)]
         };
       } else {
         return {

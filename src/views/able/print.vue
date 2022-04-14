@@ -148,22 +148,10 @@ const tableData: User[] = [
       <div class="card-header">
         <span class="font-medium">打印功能（报表、图表、图片）</span>
         <div>
-          <el-select
-            v-model="value"
-            class="m-2"
-            placeholder="Select"
-            size="small"
-          >
-            <el-option
-              v-for="item in options"
-              :key="item.value"
-              :label="item.label"
-              :value="item.value"
-            />
+          <el-select v-model="value" class="m-2" placeholder="Select" size="small">
+            <el-option v-for="item in options" :key="item.value" :label="item.label" :value="item.value" />
           </el-select>
-          <el-button size="small" type="primary" @click="onPrint"
-            >打印</el-button
-          >
+          <el-button size="small" type="primary" @click="onPrint">打印</el-button>
         </div>
       </div>
     </template>
@@ -247,12 +235,7 @@ const tableData: User[] = [
         :md="11"
         :lg="11"
         :xl="11"
-        style="
-          width: 200px;
-          height: 300px;
-          margin: 10px;
-          border: 0.01rem solid var(--el-color-primary);
-        "
+        style="width: 200px; height: 300px; margin: 10px; border: 0.01rem solid var(--el-color-primary)"
         v-motion
         :initial="{
           opacity: 0,
@@ -276,12 +259,7 @@ const tableData: User[] = [
         :md="11"
         :lg="11"
         :xl="11"
-        style="
-          width: 200px;
-          height: 300px;
-          margin: 10px;
-          border: 0.01rem solid var(--el-color-primary);
-        "
+        style="width: 200px; height: 300px; margin: 10px; border: 0.01rem solid var(--el-color-primary)"
         v-motion
         :initial="{
           opacity: 0,

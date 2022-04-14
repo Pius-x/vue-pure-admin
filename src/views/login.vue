@@ -55,8 +55,7 @@ function onUserFocus() {
 }
 
 function onUserBlur() {
-  if (user.value.length === 0)
-    removeClass(document.querySelector(".user"), "focus");
+  if (user.value.length === 0) removeClass(document.querySelector(".user"), "focus");
 }
 
 function onPwdFocus() {
@@ -64,8 +63,7 @@ function onPwdFocus() {
 }
 
 function onPwdBlur() {
-  if (pwd.value.length === 0)
-    removeClass(document.querySelector(".pwd"), "focus");
+  if (pwd.value.length === 0) removeClass(document.querySelector(".pwd"), "focus");
 }
 </script>
 
@@ -114,13 +112,7 @@ function onPwdBlur() {
           </div>
           <div>
             <h5>用户名</h5>
-            <input
-              type="text"
-              class="input"
-              v-model="user"
-              @focus="onUserFocus"
-              @blur="onUserBlur"
-            />
+            <input type="text" class="input" v-model="user" @focus="onUserFocus" @blur="onUserBlur" />
           </div>
         </div>
         <div
@@ -143,13 +135,7 @@ function onPwdBlur() {
           </div>
           <div>
             <h5>密码</h5>
-            <input
-              type="password"
-              class="input"
-              v-model="pwd"
-              @focus="onPwdFocus"
-              @blur="onPwdBlur"
-            />
+            <input type="password" class="input" v-model="pwd" @focus="onPwdFocus" @blur="onPwdBlur" />
           </div>
         </div>
         <button

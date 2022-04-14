@@ -108,10 +108,7 @@ const onLoadData = treeNode => {
     const { id } = treeNode.dataRef;
     setTimeout(() => {
       // @ts-expect-error
-      treeData3.value = treeData3.value.concat([
-        genTreeNode(id, false),
-        genTreeNode(id, true)
-      ]);
+      treeData3.value = treeData3.value.concat([genTreeNode(id, false), genTreeNode(id, true)]);
       resolve(true);
     }, 300);
   });
@@ -171,9 +168,7 @@ const onLoadData = treeNode => {
           :max-tag-count="10"
         >
           <template #title="{ title, value }">
-            <span v-if="value === '0-0-1-0'" style="color: #1890ff">{{
-              title
-            }}</span>
+            <span v-if="value === '0-0-1-0'" style="color: #1890ff">{{ title }}</span>
             <template v-else>{{ title }}</template>
           </template>
         </TreeSelect>

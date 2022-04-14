@@ -92,9 +92,7 @@ function handleClose() {
 function handleUp() {
   const { length } = resultOptions.value;
   if (length === 0) return;
-  const index = resultOptions.value.findIndex(
-    item => item.path === activePath.value
-  );
+  const index = resultOptions.value.findIndex(item => item.path === activePath.value);
   if (index === 0) {
     activePath.value = resultOptions.value[length - 1].path;
   } else {
@@ -106,9 +104,7 @@ function handleUp() {
 function handleDown() {
   const { length } = resultOptions.value;
   if (length === 0) return;
-  const index = resultOptions.value.findIndex(
-    item => item.path === activePath.value
-  );
+  const index = resultOptions.value.findIndex(item => item.path === activePath.value);
   if (index + 1 === length) {
     activePath.value = resultOptions.value[0].path;
   } else {
@@ -131,13 +127,7 @@ onKeyStroke("ArrowDown", handleDown);
 
 <template>
   <el-dialog top="5vh" v-model="show" :before-close="handleClose">
-    <el-input
-      ref="inputRef"
-      v-model="keyword"
-      clearable
-      placeholder="请输入关键词搜索"
-      @input="handleSearch"
-    >
+    <el-input ref="inputRef" v-model="keyword" clearable placeholder="请输入关键词搜索" @input="handleSearch">
       <template #prefix>
         <span class="el-input__icon">
           <IconifyIconOffline icon="search" />
@@ -146,12 +136,7 @@ onKeyStroke("ArrowDown", handleDown);
     </el-input>
     <div class="search-result-container">
       <el-empty v-if="resultOptions.length === 0" description="暂无搜索结果" />
-      <SearchResult
-        v-else
-        v-model:value="activePath"
-        :options="resultOptions"
-        @click="handleEnter"
-      />
+      <SearchResult v-else v-model:value="activePath" :options="resultOptions" @click="handleEnter" />
     </div>
     <template #footer>
       <SearchFooter />

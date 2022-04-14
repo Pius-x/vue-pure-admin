@@ -29,10 +29,7 @@ const handleClickDelete = (product: CardProductType) => {
   emit("delete-item", product);
 };
 
-const cardClass = computed(() => [
-  "list-card-item",
-  { "list-card-item__disabled": !props.product.isSetup }
-]);
+const cardClass = computed(() => ["list-card-item", { "list-card-item__disabled": !props.product.isSetup }]);
 
 const cardLogoClass = computed(() => [
   "list-card-item_detail--logo",
@@ -59,20 +56,12 @@ const cardLogoClass = computed(() => [
           >
             {{ product.isSetup ? "已启用" : "已停用" }}
           </el-tag>
-          <el-dropdown
-            trigger="click"
-            :disabled="!product.isSetup"
-            max-height="2"
-          >
+          <el-dropdown trigger="click" :disabled="!product.isSetup" max-height="2">
             <IconifyIconOffline icon="more-2-fill" class="icon-more" />
             <template #dropdown>
               <el-dropdown-menu :disabled="!product.isSetup">
-                <el-dropdown-item @click="handleClickManage(product)"
-                  >管理</el-dropdown-item
-                >
-                <el-dropdown-item @click="handleClickDelete(product)"
-                  >删除</el-dropdown-item
-                >
+                <el-dropdown-item @click="handleClickManage(product)">管理</el-dropdown-item>
+                <el-dropdown-item @click="handleClickDelete(product)">删除</el-dropdown-item>
               </el-dropdown-menu>
             </template>
           </el-dropdown>

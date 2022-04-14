@@ -29,12 +29,7 @@ const selectedVal = ({ left, right }): void => {
           <span>{{ item.title }}</span>
         </div>
       </template>
-      <Selector
-        :HsKey="key"
-        :echo="item.echo"
-        @selectedVal="selectedVal"
-        :disabled="item.disabled"
-      />
+      <Selector :HsKey="key" :echo="item.echo" @selectedVal="selectedVal" :disabled="item.disabled" />
       <h4 v-if="!item.disabled">选中范围：{{ selectRange }}</h4>
     </el-card>
   </div>

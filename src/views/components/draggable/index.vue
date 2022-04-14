@@ -121,11 +121,7 @@ onMounted(() => {
             </template>
             <!-- 拖拽实现元素位置切换 -->
             <div class="cut-container">
-              <div
-                class="item-cut"
-                v-for="(item, index) in cutLists"
-                :key="index"
-              >
+              <div class="item-cut" v-for="(item, index) in cutLists" :key="index">
                 <p>{{ item.name }}</p>
               </div>
             </div>

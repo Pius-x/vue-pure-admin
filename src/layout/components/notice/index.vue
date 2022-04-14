@@ -31,12 +31,7 @@ function tabClick() {
     </span>
     <template #dropdown>
       <el-dropdown-menu>
-        <Tabs
-          centered
-          class="dropdown-tabs"
-          v-model:activeName="activeName"
-          @tabClick="tabClick"
-        >
+        <Tabs centered class="dropdown-tabs" v-model:activeName="activeName" @tabClick="tabClick">
           <template v-for="item in notices" :key="item.key">
             <TabPane :tab="`${item.name}(${item.list.length})`">
               <el-scrollbar max-height="330px">

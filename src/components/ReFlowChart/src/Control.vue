@@ -59,20 +59,18 @@ let titleLists = ref([
 ]);
 
 const onControl = (item, key) => {
-  ["zoom", "zoom", "resetZoom", "undo", "redo", "getSnapshot"].forEach(
-    (v, i) => {
-      let domControl = props.lf;
-      if (key === 1) {
-        domControl.zoom(true);
-      }
-      if (key === 6) {
-        emit("catData");
-      }
-      if (key === i) {
-        domControl[v]();
-      }
+  ["zoom", "zoom", "resetZoom", "undo", "redo", "getSnapshot"].forEach((v, i) => {
+    let domControl = props.lf;
+    if (key === 1) {
+      domControl.zoom(true);
     }
-  );
+    if (key === 6) {
+      emit("catData");
+    }
+    if (key === i) {
+      domControl[v]();
+    }
+  });
 };
 
 const onEnter = key => {

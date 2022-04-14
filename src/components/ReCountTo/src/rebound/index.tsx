@@ -1,12 +1,5 @@
 import "./rebound.css";
-import {
-  defineComponent,
-  ref,
-  unref,
-  onBeforeMount,
-  onBeforeUnmount,
-  getCurrentInstance
-} from "vue";
+import { defineComponent, ref, unref, onBeforeMount, onBeforeUnmount, getCurrentInstance } from "vue";
 import { reboundProps } from "./props";
 
 export default defineComponent({
@@ -61,10 +54,7 @@ export default defineComponent({
 
           <svg width="0" height="0">
             <filter id="blur">
-              <feGaussianBlur
-                in="SourceGraphic"
-                stdDeviation={`0 ${props.blur}`}
-              />
+              <feGaussianBlur in="SourceGraphic" stdDeviation={`0 ${props.blur}`} />
             </filter>
           </svg>
         </div>

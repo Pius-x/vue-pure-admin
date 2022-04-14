@@ -12,12 +12,7 @@ import { cloneDeep } from "lodash-unified";
 import { templateRef } from "@vueuse/core";
 import { reactive, ref, unref, nextTick } from "vue";
 import { useCopyToClipboard } from "/@/utils/useCopyToClipboard";
-import {
-  VXETable,
-  VxeTableInstance,
-  VxeTableEvents,
-  VxeFormPropTypes
-} from "vxe-table";
+import { VXETable, VxeTableInstance, VxeTableEvents, VxeFormPropTypes } from "vxe-table";
 type onEditNRow = {
   name: string;
   model: string;
@@ -104,10 +99,7 @@ const handleSearch = () => {
 
     dictData.tableData = XEUtils.searchTree(
       originData,
-      item =>
-        searchProps.some(
-          key => XEUtils.toValueString(item[key]).indexOf(filterName) > -1
-        ),
+      item => searchProps.some(key => XEUtils.toValueString(item[key]).indexOf(filterName) > -1),
       options
     );
 
@@ -210,31 +202,16 @@ function handleClose() {
     <!-- 工具栏 -->
     <vxe-toolbar>
       <template #buttons>
-        <vxe-input
-          v-model="dictData.filterName"
-          :placeholder="t('buttons.hssearch')"
-          @keyup="searchEvent"
-        />
+        <vxe-input v-model="dictData.filterName" :placeholder="t('buttons.hssearch')" @keyup="searchEvent" />
       </template>
       <template #tools>
-        <vxe-button
-          icon="fa fa-plus-square-o"
-          status="primary"
-          @click="onAdd"
-          >{{ t("buttons.hsadd") }}</vxe-button
-        >
-        <vxe-button
-          icon="fa fa-folder-open-o"
-          status="primary"
-          @click="$refs.xTree.setAllTreeExpand(true)"
-          >{{ t("buttons.hsexpendAll") }}</vxe-button
-        >
-        <vxe-button
-          icon="fa fa-folder-o"
-          status="primary"
-          @click="$refs.xTree.clearTreeExpand()"
-          >{{ t("buttons.hscollapseAll") }}</vxe-button
-        >
+        <vxe-button icon="fa fa-plus-square-o" status="primary" @click="onAdd">{{ t("buttons.hsadd") }}</vxe-button>
+        <vxe-button icon="fa fa-folder-open-o" status="primary" @click="$refs.xTree.setAllTreeExpand(true)">{{
+          t("buttons.hsexpendAll")
+        }}</vxe-button>
+        <vxe-button icon="fa fa-folder-o" status="primary" @click="$refs.xTree.clearTreeExpand()">{{
+          t("buttons.hscollapseAll")
+        }}</vxe-button>
       </template>
     </vxe-toolbar>
 
@@ -254,39 +231,17 @@ function handleClose() {
       <vxe-table-column tree-node field="name" title="字典名称" />
       <vxe-table-column title="字典类型">
         <template #default="{ row }">
-          <el-tooltip
-            effect="dark"
-            :content="'双击复制：' + row.model"
-            placement="right"
-          >
+          <el-tooltip effect="dark" :content="'双击复制：' + row.model" placement="right">
             <span class="text-model">{{ row.model }}</span>
           </el-tooltip>
         </template>
       </vxe-table-column>
       <vxe-table-column title="操作" width="330" fixed="right">
         <template #default="{ row }">
-          <vxe-button
-            type="text"
-            icon="fa fa-pencil-square-o"
-            @click="onEdit(row)"
-            >编辑</vxe-button
-          >
-          <vxe-button
-            type="text"
-            icon="fa fa-plus-square-o"
-            @click="onAddChild(row)"
-            >新增子类型</vxe-button
-          >
-          <vxe-button
-            v-show="row.model"
-            type="text"
-            icon="fa fa-cog"
-            @click="onDeploy(row)"
-            >字典配置</vxe-button
-          >
-          <vxe-button type="text" icon="fa fa-trash-o" @click="confirmEvent"
-            >删除</vxe-button
-          >
+          <vxe-button type="text" icon="fa fa-pencil-square-o" @click="onEdit(row)">编辑</vxe-button>
+          <vxe-button type="text" icon="fa fa-plus-square-o" @click="onAddChild(row)">新增子类型</vxe-button>
+          <vxe-button v-show="row.model" type="text" icon="fa fa-cog" @click="onDeploy(row)">字典配置</vxe-button>
+          <vxe-button type="text" icon="fa fa-trash-o" @click="confirmEvent">删除</vxe-button>
         </template>
       </vxe-table-column>
     </vxe-table>

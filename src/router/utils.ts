@@ -30,21 +30,15 @@ function ascending(arr: any[]) {
       }
     }
   });
-  return arr.sort(
-    (a: { meta: { rank: number } }, b: { meta: { rank: number } }) => {
-      return a?.meta?.rank - b?.meta?.rank;
-    }
-  );
+  return arr.sort((a: { meta: { rank: number } }, b: { meta: { rank: number } }) => {
+    return a?.meta?.rank - b?.meta?.rank;
+  });
 }
 
 // 过滤meta中showLink为false的路由
 function filterTree(data: RouteComponent[]) {
-  const newTree = data.filter(
-    (v: { meta: { showLink: boolean } }) => v.meta?.showLink !== false
-  );
-  newTree.forEach(
-    (v: { children }) => v.children && (v.children = filterTree(v.children))
-  );
+  const newTree = data.filter((v: { meta: { showLink: boolean } }) => v.meta?.showLink !== false);
+  newTree.forEach((v: { children }) => v.children && (v.children = filterTree(v.children)));
   return newTree;
 }
 
@@ -89,10 +83,7 @@ function findRouteByPath(path: string, routes: RouteRecordRaw[]) {
     return res;
   } else {
     for (let i = 0; i < routes.length; i++) {
-      if (
-        routes[i].children instanceof Array &&
-        routes[i].children.length > 0
-      ) {
+      if (routes[i].children instanceof Array && routes[i].children.length > 0) {
         res = findRouteByPath(path, routes[i].children);
         if (res) {
           return res;
@@ -120,29 +111,21 @@ function initRouter(name: string) {
       if (info.length === 0) {
         usePermissionStoreHook().changeSetting(info);
       } else {
-        formatFlatteningRoutes(addAsyncRoutes(info)).map(
-          (v: RouteRecordRaw) => {
-            // 防止重复添加路由
-            if (
-              router.options.routes[0].children.findIndex(
-                value => value.path === v.path
-              ) !== -1
-            ) {
-              return;
-            } else {
-              // 切记将路由push到routes后还需要使用addRoute，这样路由才能正常跳转
-              router.options.routes[0].children.push(v);
-              // 最终路由进行升序
-              ascending(router.options.routes[0].children);
-              if (!router.hasRoute(v?.name)) router.addRoute(v);
-              const flattenRouters = router
-                .getRoutes()
-                .find(n => n.path === "/");
-              router.addRoute(flattenRouters);
-            }
-            resolve(router);
+        formatFlatteningRoutes(addAsyncRoutes(info)).map((v: RouteRecordRaw) => {
+          // 防止重复添加路由
+          if (router.options.routes[0].children.findIndex(value => value.path === v.path) !== -1) {
+            return;
+          } else {
+            // 切记将路由push到routes后还需要使用addRoute，这样路由才能正常跳转
+            router.options.routes[0].children.push(v);
+            // 最终路由进行升序
+            ascending(router.options.routes[0].children);
+            if (!router.hasRoute(v?.name)) router.addRoute(v);
+            const flattenRouters = router.getRoutes().find(n => n.path === "/");
+            router.addRoute(flattenRouters);
           }
-        );
+          resolve(router);
+        });
         usePermissionStoreHook().changeSetting(info);
       }
       router.addRoute({
@@ -163,9 +146,7 @@ function formatFlatteningRoutes(routesList: RouteRecordRaw[]) {
   let hierarchyList = buildHierarchyTree(routesList);
   for (let i = 0; i < hierarchyList.length; i++) {
     if (hierarchyList[i].children) {
-      hierarchyList = hierarchyList
-        .slice(0, i + 1)
-        .concat(hierarchyList[i].children, hierarchyList.slice(i + 1));
+      hierarchyList = hierarchyList.slice(0, i + 1).concat(hierarchyList[i].children, hierarchyList.slice(i + 1));
     }
   }
   return hierarchyList;

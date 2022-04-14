@@ -37,8 +37,7 @@ export function deleteChildren(menuTree, pathList = []) {
     node.id = key;
     node.parentId = pathList.length ? pathList[pathList.length - 1] : null;
     node.pathList = [...pathList, node.id];
-    node.uniqueId =
-      node.pathList.length > 1 ? node.pathList.join("-") : node.pathList[0];
+    node.uniqueId = node.pathList.length > 1 ? node.pathList.join("-") : node.pathList[0];
     const hasChildren = node.children && node.children.length > 0;
     if (hasChildren) {
       deleteChildren(node.children, node.pathList);
@@ -94,11 +93,7 @@ export function getNodeByUniqueId(menuTree, uniqueId) {
  * @param {Object} fields 唯一uniqueId
  * @return {menuTree} 追加字段后的树
  */
-export function appendFieldByUniqueId(
-  menuTree: Array<any>,
-  uniqueId: Number | String,
-  fields: Object
-) {
+export function appendFieldByUniqueId(menuTree: Array<any>, uniqueId: Number | String, fields: Object) {
   if (!Array.isArray(menuTree)) {
     console.warn("menuTree must be an array");
     return;
@@ -106,10 +101,7 @@ export function appendFieldByUniqueId(
   if (!menuTree || menuTree.length === 0) return {};
   for (const node of menuTree) {
     const hasChildren = node.children && node.children.length > 0;
-    if (
-      node.uniqueId === uniqueId &&
-      Object.prototype.toString.call(fields) === "[object Object]"
-    )
+    if (node.uniqueId === uniqueId && Object.prototype.toString.call(fields) === "[object Object]")
       Object.assign(node, fields);
     if (hasChildren) {
       appendFieldByUniqueId(node.children, uniqueId, fields);
@@ -125,12 +117,7 @@ export function appendFieldByUniqueId(
  * @param {*} parentId 父节点字段 默认 'parentId'
  * @param {*} children 孩子节点字段 默认 'children'
  */
-export function handleTree(
-  data,
-  id?: string,
-  parentId?: string,
-  children?: string
-) {
+export function handleTree(data, id?: string, parentId?: string, children?: string) {
   const config = {
     id: id || "id",
     parentId: parentId || "parentId",

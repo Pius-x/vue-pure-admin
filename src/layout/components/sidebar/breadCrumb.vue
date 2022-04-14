@@ -43,12 +43,7 @@ const getBreadcrumb = (): void => {
     }
   });
   if (router.currentRoute.value.meta?.refreshRedirect) {
-    matched.unshift(
-      findRouteByPath(
-        router.currentRoute.value.meta.refreshRedirect as string,
-        routes
-      )
-    );
+    matched.unshift(findRouteByPath(router.currentRoute.value.meta.refreshRedirect as string, routes));
   } else {
     // 过滤与子级相同标题的父级路由
     matched = matched.filter(item => {
@@ -70,9 +65,7 @@ const getBreadcrumb = (): void => {
     ].concat(matched);
   }
 
-  levelList.value = matched.filter(
-    item => item?.meta && item?.meta.title !== false
-  );
+  levelList.value = matched.filter(item => item?.meta && item?.meta.title !== false);
 };
 
 getBreadcrumb();
@@ -101,11 +94,9 @@ const handleLink = (item: RouteLocationMatched): any => {
   <el-breadcrumb class="app-breadcrumb" separator="/">
     <transition-group appear name="breadcrumb">
       <el-breadcrumb-item v-for="(item, index) in levelList" :key="item.path">
-        <span
-          v-if="item.redirect === 'noRedirect' || index == levelList.length - 1"
-          class="no-redirect"
-          >{{ transformI18n(item.meta.title, item.meta.i18n) }}</span
-        >
+        <span v-if="item.redirect === 'noRedirect' || index == levelList.length - 1" class="no-redirect">{{
+          transformI18n(item.meta.title, item.meta.i18n)
+        }}</span>
         <a v-else @click.prevent="handleLink(item)">
           {{ transformI18n(item.meta.title, item.meta.i18n) }}
         </a>

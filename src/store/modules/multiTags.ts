@@ -39,14 +39,9 @@ export const useMultiTagsStore = defineStore({
       }
     },
     tagsCache(multiTags) {
-      this.getMultiTagsCache &&
-        storageLocal.setItem("responsive-tags", multiTags);
+      this.getMultiTagsCache && storageLocal.setItem("responsive-tags", multiTags);
     },
-    handleTags<T>(
-      mode: string,
-      value?: T | multiType,
-      position?: positionType
-    ): T {
+    handleTags<T>(mode: string, value?: T | multiType, position?: positionType): T {
       switch (mode) {
         case "equal":
           this.multiTags = value;
@@ -73,14 +68,9 @@ export const useMultiTagsStore = defineStore({
             if (dynamicLevel > 0) {
               // dynamicLevel动态路由可打开的数量
               // 获取到已经打开的动态路由数, 判断是否大于dynamicLevel
-              if (
-                this.multiTags.filter(e => e?.path === tagPath).length >=
-                dynamicLevel
-              ) {
+              if (this.multiTags.filter(e => e?.path === tagPath).length >= dynamicLevel) {
                 // 关闭第一个
-                const index = this.multiTags.findIndex(
-                  item => item?.path === tagPath
-                );
+                const index = this.multiTags.findIndex(item => item?.path === tagPath);
                 index !== -1 && this.multiTags.splice(index, 1);
               }
             }

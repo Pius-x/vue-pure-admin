@@ -47,13 +47,7 @@ const lists = ref([
         </el-icon>
         标签
       </template>
-      <el-tag
-        v-for="item in lists"
-        :key="item.label"
-        :type="item.type"
-        size="small"
-        effect="dark"
-      >
+      <el-tag v-for="item in lists" :key="item.label" :type="item.type" size="small" effect="dark">
         {{ item.label }}
       </el-tag>
     </el-descriptions-item>

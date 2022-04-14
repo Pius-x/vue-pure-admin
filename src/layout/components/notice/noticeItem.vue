@@ -28,18 +28,14 @@ function hoverDescription(event, description) {
   tempTag.innerText = description;
   tempTag.className = "getDescriptionWidth";
   document.querySelector("body").appendChild(tempTag);
-  let currentWidth = (
-    document.querySelector(".getDescriptionWidth") as HTMLSpanElement
-  ).offsetWidth;
+  let currentWidth = (document.querySelector(".getDescriptionWidth") as HTMLSpanElement).offsetWidth;
   document.querySelector(".getDescriptionWidth").remove();
 
   // cellWidth为容器的宽度
   const cellWidth = event.target.offsetWidth;
 
   // 当文本宽度大于容器宽度两倍时，代表文本显示超过两行
-  currentWidth > 2 * cellWidth
-    ? (descriptionTooltip.value = true)
-    : (descriptionTooltip.value = false);
+  currentWidth > 2 * cellWidth ? (descriptionTooltip.value = true) : (descriptionTooltip.value = false);
 }
 </script>
 
@@ -59,19 +55,11 @@ function hoverDescription(event, description) {
           :content="props.noticeItem.title"
           placement="top-start"
         >
-          <div
-            ref="titleRef"
-            class="notice-title-content"
-            @mouseover="hoverTitle"
-          >
+          <div ref="titleRef" class="notice-title-content" @mouseover="hoverTitle">
             {{ props.noticeItem.title }}
           </div>
         </el-tooltip>
-        <el-tag
-          v-if="props.noticeItem?.extra"
-          :type="props.noticeItem?.status"
-          size="small"
-          class="notice-title-extra"
+        <el-tag v-if="props.noticeItem?.extra" :type="props.noticeItem?.status" size="small" class="notice-title-extra"
           >{{ props.noticeItem?.extra }}
         </el-tag>
       </div>

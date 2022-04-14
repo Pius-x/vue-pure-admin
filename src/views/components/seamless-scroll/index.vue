@@ -54,16 +54,9 @@ function changeDirection(val) {
         <div class="card-header">
           <span>无缝滚动示例</span>
           <el-button class="button" type="text" @click="changeDirection('top')">
-            <span
-              :style="{ color: classOption.direction === 'top' ? 'red' : '' }"
-              >向上滚动</span
-            >
+            <span :style="{ color: classOption.direction === 'top' ? 'red' : '' }">向上滚动</span>
           </el-button>
-          <el-button
-            class="button"
-            type="text"
-            @click="changeDirection('bottom')"
-          >
+          <el-button class="button" type="text" @click="changeDirection('bottom')">
             <span
               :style="{
                 color: classOption.direction === 'bottom' ? 'red' : ''
@@ -71,34 +64,15 @@ function changeDirection(val) {
               >向下滚动</span
             >
           </el-button>
-          <el-button
-            class="button"
-            type="text"
-            @click="changeDirection('left')"
-          >
-            <span
-              :style="{ color: classOption.direction === 'left' ? 'red' : '' }"
-              >向左滚动</span
-            >
+          <el-button class="button" type="text" @click="changeDirection('left')">
+            <span :style="{ color: classOption.direction === 'left' ? 'red' : '' }">向左滚动</span>
           </el-button>
-          <el-button
-            class="button"
-            type="text"
-            @click="changeDirection('right')"
-          >
-            <span
-              :style="{ color: classOption.direction === 'right' ? 'red' : '' }"
-              >向右滚动</span
-            >
+          <el-button class="button" type="text" @click="changeDirection('right')">
+            <span :style="{ color: classOption.direction === 'right' ? 'red' : '' }">向右滚动</span>
           </el-button>
         </div>
       </template>
-      <SeamlessScroll
-        ref="scroll"
-        :data="listData"
-        :class-option="classOption"
-        class="warp"
-      >
+      <SeamlessScroll ref="scroll" :data="listData" :class-option="classOption" class="warp">
         <ul class="item">
           <li v-for="(item, index) in listData" :key="index">
             <span class="title" v-text="item.title" />

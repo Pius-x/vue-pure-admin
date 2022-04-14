@@ -79,21 +79,13 @@ function onChange(checked, { $index, row }) {
     }
   )
     .then(() => {
-      switchLoadMap.value[$index] = Object.assign(
-        {},
-        switchLoadMap.value[$index],
-        {
-          loading: true
-        }
-      );
+      switchLoadMap.value[$index] = Object.assign({}, switchLoadMap.value[$index], {
+        loading: true
+      });
       setTimeout(() => {
-        switchLoadMap.value[$index] = Object.assign(
-          {},
-          switchLoadMap.value[$index],
-          {
-            loading: false
-          }
-        );
+        switchLoadMap.value[$index] = Object.assign({}, switchLoadMap.value[$index], {
+          loading: false
+        });
         message.success("已成功修改角色状态");
       }, 300);
     })
@@ -125,12 +117,7 @@ onMounted(() => {
 
 <template>
   <div class="main">
-    <el-form
-      ref="formRef"
-      :inline="true"
-      :model="form"
-      class="bg-white w-99/100 pl-8 pt-4"
-    >
+    <el-form ref="formRef" :inline="true" :model="form" class="bg-white w-99/100 pl-8 pt-4">
       <el-form-item label="角色编码：" prop="code">
         <el-input v-model="form.code" placeholder="请输入" clearable />
       </el-form-item>
@@ -144,17 +131,8 @@ onMounted(() => {
         </el-select>
       </el-form-item>
       <el-form-item>
-        <el-button
-          type="primary"
-          :icon="useRenderIcon('search')"
-          :loading="loading"
-          @click="onSearch"
-        >
-          搜索</el-button
-        >
-        <el-button :icon="useRenderIcon('refresh')" @click="resetForm(formRef)"
-          >重置</el-button
-        >
+        <el-button type="primary" :icon="useRenderIcon('search')" :loading="loading" @click="onSearch"> 搜索</el-button>
+        <el-button :icon="useRenderIcon('refresh')" @click="resetForm(formRef)">重置</el-button>
       </el-form-item>
     </el-form>
 
@@ -167,9 +145,7 @@ onMounted(() => {
       <div class="flex justify-between w-full h-60px p-4">
         <p class="font-bold">角色列表</p>
         <div class="w-220px flex items-center justify-around">
-          <el-button type="primary" :icon="useRenderIcon('add')"
-            >新增角色</el-button
-          >
+          <el-button type="primary" :icon="useRenderIcon('add')">新增角色</el-button>
           <!-- <el-button type="success" :icon="useRenderIcon('import')"
             >导入</el-button
           >
@@ -189,30 +165,16 @@ onMounted(() => {
 
           <el-tooltip effect="dark" content="密度" placement="top">
             <el-dropdown id="header-translation" trigger="click">
-              <IconifyIconOffline
-                class="cursor-pointer outline-none"
-                icon="density"
-                width="20"
-                color="#606266"
-              />
+              <IconifyIconOffline class="cursor-pointer outline-none" icon="density" width="20" color="#606266" />
               <template #dropdown>
                 <el-dropdown-menu class="translation">
-                  <el-dropdown-item
-                    :style="getDropdownItemStyle('large')"
-                    @click="size = 'large'"
-                  >
+                  <el-dropdown-item :style="getDropdownItemStyle('large')" @click="size = 'large'">
                     松散
                   </el-dropdown-item>
-                  <el-dropdown-item
-                    :style="getDropdownItemStyle('default')"
-                    @click="size = 'default'"
-                  >
+                  <el-dropdown-item :style="getDropdownItemStyle('default')" @click="size = 'default'">
                     默认
                   </el-dropdown-item>
-                  <el-dropdown-item
-                    :style="getDropdownItemStyle('small')"
-                    @click="size = 'small'"
-                  >
+                  <el-dropdown-item :style="getDropdownItemStyle('small')" @click="size = 'small'">
                     紧凑
                   </el-dropdown-item>
                 </el-dropdown-menu>
@@ -269,19 +231,8 @@ onMounted(() => {
         :header-cell-style="{ background: '#fafafa', color: '#606266' }"
         @selection-change="handleSelectionChange"
       >
-        <el-table-column
-          v-if="checkList.includes('勾选列')"
-          type="selection"
-          align="center"
-          width="55"
-        />
-        <el-table-column
-          v-if="checkList.includes('序号列')"
-          type="index"
-          label="序号"
-          align="center"
-          width="60"
-        />
+        <el-table-column v-if="checkList.includes('勾选列')" type="selection" align="center" width="55" />
+        <el-table-column v-if="checkList.includes('序号列')" type="index" label="序号" align="center" width="60" />
         <el-table-column label="角色编号" align="center" prop="id" />
         <el-table-column label="角色编码" align="center" prop="code" />
         <el-table-column label="角色名称" align="center" prop="name" />
@@ -300,28 +251,17 @@ onMounted(() => {
             />
           </template>
         </el-table-column>
-        <el-table-column
-          label="创建时间"
-          align="center"
-          width="180"
-          prop="createTime"
-        >
+        <el-table-column label="创建时间" align="center" width="180" prop="createTime">
           <template #default="scope">
-            <span>{{
-              dayjs(scope.row.createTime).format("YYYY-MM-DD HH:mm:ss")
-            }}</span>
+            <span>{{ dayjs(scope.row.createTime).format("YYYY-MM-DD HH:mm:ss") }}</span>
           </template>
         </el-table-column>
         <el-table-column label="操作" width="130" align="center">
           <template #default="scope">
-            <el-button type="text" @click="handleUpdate(scope.row)"
-              >修改</el-button
-            >
+            <el-button type="text" @click="handleUpdate(scope.row)">修改</el-button>
             <el-popconfirm title="是否确认删除?">
               <template #reference>
-                <el-button type="text" @click="handleDelete(scope.row)"
-                  >删除</el-button
-                >
+                <el-button type="text" @click="handleDelete(scope.row)">删除</el-button>
               </template>
             </el-popconfirm>
           </template>

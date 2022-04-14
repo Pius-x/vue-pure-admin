@@ -5,19 +5,11 @@ import { useRouter, useRoute } from "vue-router";
 import { TreeSelect } from "@pureadmin/components";
 import { useMultiTagsStoreHook } from "/@/store/modules/multiTags";
 
-import {
-  deleteChildren,
-  appendFieldByUniqueId,
-  getNodeByUniqueId
-} from "/@/utils/tree";
+import { deleteChildren, appendFieldByUniqueId, getNodeByUniqueId } from "/@/utils/tree";
 import { usePermissionStoreHook } from "/@/store/modules/permission";
 
 let treeData = computed(() => {
-  return appendFieldByUniqueId(
-    deleteChildren(usePermissionStoreHook().menusTree),
-    0,
-    { disabled: true }
-  );
+  return appendFieldByUniqueId(deleteChildren(usePermissionStoreHook().menusTree), 0, { disabled: true });
 });
 
 const { t } = useI18n();
@@ -45,8 +37,7 @@ function toDetail(index: number) {
 function onCloseTags() {
   value.value.forEach(uniqueId => {
     let currentPath =
-      getNodeByUniqueId(treeData.value, uniqueId).redirect ??
-      getNodeByUniqueId(treeData.value, uniqueId).path;
+      getNodeByUniqueId(treeData.value, uniqueId).redirect ?? getNodeByUniqueId(treeData.value, uniqueId).path;
     useMultiTagsStoreHook().handleTags("splice", currentPath);
   });
 }
@@ -56,14 +47,10 @@ function onCloseTags() {
   <el-card>
     <template #header>
       <div class="card-header">
-        <span class="font-medium"
-          >标签页复用，超出限制自动关闭（使用场景: 动态路由）</span
-        >
+        <span class="font-medium">标签页复用，超出限制自动关闭（使用场景: 动态路由）</span>
       </div>
     </template>
-    <el-button v-for="index in 6" :key="index" @click="toDetail(index)">
-      打开{{ index }}详情页
-    </el-button>
+    <el-button v-for="index in 6" :key="index" @click="toDetail(index)"> 打开{{ index }}详情页 </el-button>
     <el-divider />
     <TreeSelect
       class="w-300px"

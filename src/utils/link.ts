@@ -5,8 +5,7 @@ export const openLink = <T>(link: T): void => {
   $a.setAttribute("target", "_blank");
   $a.setAttribute("rel", "noreferrer noopener");
   $a.setAttribute("id", "external");
-  document.getElementById("external") &&
-    document.body.removeChild(document.getElementById("external"));
+  document.getElementById("external") && document.body.removeChild(document.getElementById("external"));
   document.body.appendChild($a);
   $a.click();
   $a.remove();

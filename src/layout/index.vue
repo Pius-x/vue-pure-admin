@@ -1,12 +1,5 @@
 <script setup lang="ts">
-import {
-  h,
-  reactive,
-  computed,
-  onMounted,
-  defineComponent,
-  getCurrentInstance
-} from "vue";
+import { h, reactive, computed, onMounted, defineComponent, getCurrentInstance } from "vue";
 import { setType } from "./types";
 import { useI18n } from "vue-i18n";
 import { routerArrays } from "./types";
@@ -34,10 +27,7 @@ const instance = getCurrentInstance().appContext.app.config.globalProperties;
 // 清空缓存后从serverConfig.json读取默认配置并赋值到storage中
 const layout = computed(() => {
   // 路由
-  if (
-    useMultiTagsStore().multiTagsCache &&
-    (!instance.$storage.tags || instance.$storage.tags.length === 0)
-  ) {
+  if (useMultiTagsStore().multiTagsCache && (!instance.$storage.tags || instance.$storage.tags.length === 0)) {
     // eslint-disable-next-line vue/no-side-effects-in-computed-properties
     instance.$storage.tags = routerArrays;
   }
@@ -163,21 +153,14 @@ const layoutHeader = defineComponent({
       "div",
       {
         class: { "fixed-header": set.fixedHeader },
-        style: [
-          set.hideTabs && layout.value.includes("horizontal")
-            ? "box-shadow: 0 1px 4px rgb(0 21 41 / 8%);"
-            : ""
-        ]
+        style: [set.hideTabs && layout.value.includes("horizontal") ? "box-shadow: 0 1px 4px rgb(0 21 41 / 8%);" : ""]
       },
       {
         default: () => [
-          !pureSetting.hiddenSideBar &&
-          (layout.value.includes("vertical") || layout.value.includes("mix"))
+          !pureSetting.hiddenSideBar && (layout.value.includes("vertical") || layout.value.includes("mix"))
             ? h(navbar)
             : h("div"),
-          !pureSetting.hiddenSideBar && layout.value.includes("horizontal")
-            ? h(Horizontal)
-            : h("div"),
+          !pureSetting.hiddenSideBar && layout.value.includes("horizontal") ? h(Horizontal) : h("div"),
           h(
             tag,
             {},
@@ -187,9 +170,7 @@ const layoutHeader = defineComponent({
                   "span",
                   { onClick: onFullScreen },
                   {
-                    default: () => [
-                      !pureSetting.hiddenSideBar ? h(fullScreen) : h(exitScreen)
-                    ]
+                    default: () => [!pureSetting.hiddenSideBar ? h(fullScreen) : h(exitScreen)]
                   }
                 )
               ]
@@ -205,37 +186,19 @@ const layoutHeader = defineComponent({
 <template>
   <div :class="['app-wrapper', set.classes]" v-resize>
     <div
-      v-show="
-        set.device === 'mobile' &&
-        set.sidebar.opened &&
-        layout.includes('vertical')
-      "
+      v-show="set.device === 'mobile' && set.sidebar.opened && layout.includes('vertical')"
       class="app-mask"
       @click="useAppStoreHook().toggleSideBar()"
     />
-    <Vertical
-      v-show="
-        !pureSetting.hiddenSideBar &&
-        (layout.includes('vertical') || layout.includes('mix'))
-      "
-    />
-    <div
-      :class="[
-        'main-container',
-        pureSetting.hiddenSideBar ? 'main-hidden' : ''
-      ]"
-    >
+    <Vertical v-show="!pureSetting.hiddenSideBar && (layout.includes('vertical') || layout.includes('mix'))" />
+    <div :class="['main-container', pureSetting.hiddenSideBar ? 'main-hidden' : '']">
       <div v-if="set.fixedHeader">
         <layout-header />
         <!-- 主体内容 -->
         <app-main :fixed-header="set.fixedHeader" />
       </div>
       <el-scrollbar v-else>
-        <el-backtop
-          title="回到顶部"
-          target=".main-container .el-scrollbar__wrap"
-          ><backTop />
-        </el-backtop>
+        <el-backtop title="回到顶部" target=".main-container .el-scrollbar__wrap"><backTop /> </el-backtop>
         <layout-header />
         <!-- 主体内容 -->
         <app-main :fixed-header="set.fixedHeader" />

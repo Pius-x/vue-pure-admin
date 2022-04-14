@@ -44,8 +44,7 @@ const pureSetting = useSettingStoreHook();
 const tabDom = templateRef<HTMLElement | null>("tabDom", null);
 const containerDom = templateRef<HTMLElement | null>("containerDom", null);
 const scrollbarDom = templateRef<HTMLElement | null>("scrollbarDom", null);
-const showTags =
-  ref(storageLocal.getItem("responsive-configure").hideTabs) ?? "false";
+const showTags = ref(storageLocal.getItem("responsive-configure").hideTabs) ?? "false";
 let multiTags: ComputedRef<Array<RouteConfigs>> = computed(() => {
   return useMultiTagsStoreHook()?.multiTags;
 });
@@ -137,9 +136,7 @@ const moveToView = (index: number): void => {
   const tabItemElOffsetLeft = (tabItemEl as HTMLElement)?.offsetLeft;
   const tabItemOffsetWidth = (tabItemEl as HTMLElement)?.offsetWidth;
   // 标签页导航栏可视长度（不包含溢出部分）
-  const scrollbarDomWidth = scrollbarDom.value
-    ? scrollbarDom.value?.offsetWidth
-    : 0;
+  const scrollbarDomWidth = scrollbarDom.value ? scrollbarDom.value?.offsetWidth : 0;
   // 已有标签页总长度（包含溢出部分）
   const tabDomWidth = tabDom.value ? tabDom.value?.offsetWidth : 0;
 
@@ -150,40 +147,25 @@ const moveToView = (index: number): void => {
     translateX.value = -tabItemElOffsetLeft + tabNavPadding;
   } else if (
     tabItemElOffsetLeft > -translateX.value &&
-    tabItemElOffsetLeft + tabItemOffsetWidth <
-      -translateX.value + scrollbarDomWidth
+    tabItemElOffsetLeft + tabItemOffsetWidth < -translateX.value + scrollbarDomWidth
   ) {
     // 标签在可视区域
-    translateX.value = Math.min(
-      0,
-      scrollbarDomWidth -
-        tabItemOffsetWidth -
-        tabItemElOffsetLeft -
-        tabNavPadding
-    );
+    translateX.value = Math.min(0, scrollbarDomWidth - tabItemOffsetWidth - tabItemElOffsetLeft - tabNavPadding);
   } else {
     // 标签在可视区域右侧
-    translateX.value = -(
-      tabItemElOffsetLeft -
-      (scrollbarDomWidth - tabNavPadding - tabItemOffsetWidth)
-    );
+    translateX.value = -(tabItemElOffsetLeft - (scrollbarDomWidth - tabNavPadding - tabItemOffsetWidth));
   }
 };
 
 const handleScroll = (offset: number): void => {
-  const scrollbarDomWidth = scrollbarDom.value
-    ? scrollbarDom.value?.offsetWidth
-    : 0;
+  const scrollbarDomWidth = scrollbarDom.value ? scrollbarDom.value?.offsetWidth : 0;
   const tabDomWidth = tabDom.value ? tabDom.value.offsetWidth : 0;
   if (offset > 0) {
     translateX.value = Math.min(0, translateX.value + offset);
   } else {
     if (scrollbarDomWidth < tabDomWidth) {
       if (translateX.value >= -(tabDomWidth - scrollbarDomWidth)) {
-        translateX.value = Math.max(
-          translateX.value + offset,
-          scrollbarDomWidth - tabDomWidth
-        );
+        translateX.value = Math.max(translateX.value + offset, scrollbarDomWidth - tabDomWidth);
       }
     } else {
       translateX.value = 0;
@@ -237,9 +219,7 @@ const tagsViews = reactive<Array<tagsViewsType>>([
 ]);
 
 // 显示模式，默认灵动模式显示
-const showModel = ref(
-  storageLocal.getItem("responsive-configure")?.showModel || "smart"
-);
+const showModel = ref(storageLocal.getItem("responsive-configure")?.showModel || "smart");
 if (!showModel.value) {
   const configure = storageLocal.getItem("responsive-configure");
   configure.showModel = "card";
@@ -306,11 +286,7 @@ function deleteDynamicTag(obj: any, current: any, tag?: string) {
     }
   });
 
-  const spliceRoute = (
-    startIndex?: number,
-    length?: number,
-    other?: boolean
-  ): void => {
+  const spliceRoute = (startIndex?: number, length?: number, other?: boolean): void => {
     if (other) {
       useMultiTagsStoreHook().handleTags("equal", [
         {
@@ -346,9 +322,7 @@ function deleteDynamicTag(obj: any, current: any, tag?: string) {
   let newRoute = useMultiTagsStoreHook().handleTags("slice");
   if (current === route.path) {
     // 删除缓存路由
-    tag
-      ? delAliveRoutes(delAliveRouteList)
-      : handleAliveRoute(route.matched, "delete");
+    tag ? delAliveRoutes(delAliveRouteList) : handleAliveRoute(route.matched, "delete");
     // 如果删除当前激活tag就自动切换到最后一个tag
     if (tag === "left") return;
     nextTick(() => {
@@ -456,11 +430,7 @@ function disabledMenus(value: boolean) {
 }
 
 // 检查当前右键的菜单两边是否存在别的菜单，如果左侧的菜单是首页，则不显示关闭左侧标签页，如果右侧没有菜单，则不显示关闭右侧标签页
-function showMenuModel(
-  currentPath: string,
-  query: object = {},
-  refresh = false
-) {
+function showMenuModel(currentPath: string, query: object = {}, refresh = false) {
   let allRoute = multiTags.value;
   let routeLength = multiTags.value.length;
   let currentIndex = -1;
@@ -543,9 +513,7 @@ function openMenu(tag, e) {
   } else {
     buttonLeft.value = left;
   }
-  pureSetting.hiddenSideBar
-    ? (buttonTop.value = e.clientY)
-    : (buttonTop.value = e.clientY - 40);
+  pureSetting.hiddenSideBar ? (buttonTop.value = e.clientY) : (buttonTop.value = e.clientY - 40);
   setTimeout(() => {
     visible.value = true;
   }, 10);
@@ -564,8 +532,7 @@ function tagOnClick(item) {
 function onMouseenter(index) {
   if (index) activeIndex.value = index;
   if (unref(showModel) === "smart") {
-    if (hasClass(instance.refs["schedule" + index][0], "schedule-active"))
-      return;
+    if (hasClass(instance.refs["schedule" + index][0], "schedule-active")) return;
     toggleClass(true, "schedule-in", instance.refs["schedule" + index][0]);
     toggleClass(false, "schedule-out", instance.refs["schedule" + index][0]);
   } else {
@@ -579,8 +546,7 @@ function onMouseenter(index) {
 function onMouseleave(index) {
   activeIndex.value = -1;
   if (unref(showModel) === "smart") {
-    if (hasClass(instance.refs["schedule" + index][0], "schedule-active"))
-      return;
+    if (hasClass(instance.refs["schedule" + index][0], "schedule-active")) return;
     toggleClass(false, "schedule-in", instance.refs["schedule" + index][0]);
     toggleClass(true, "schedule-out", instance.refs["schedule" + index][0]);
   } else {
@@ -652,55 +618,32 @@ const getContextMenuStyle = computed((): CSSProperties => {
           :class="[
             'scroll-item is-closable',
             linkIsActive(item),
-            $route.path === item.path && showModel === 'card'
-              ? 'card-active'
-              : ''
+            $route.path === item.path && showModel === 'card' ? 'card-active' : ''
           ]"
           @contextmenu.prevent="openMenu(item, $event)"
           @mouseenter.prevent="onMouseenter(index)"
           @mouseleave.prevent="onMouseleave(index)"
           @click="tagOnClick(item)"
         >
-          <router-link :to="item.path"
-            >{{ transformI18n(item.meta.title, item.meta.i18n) }}
-          </router-link>
+          <router-link :to="item.path">{{ transformI18n(item.meta.title, item.meta.i18n) }} </router-link>
           <span
-            v-if="
-              iconIsActive(item, index) ||
-              (index === activeIndex && index !== 0)
-            "
+            v-if="iconIsActive(item, index) || (index === activeIndex && index !== 0)"
             class="el-icon-close"
             @click.stop="deleteMenu(item)"
           >
             <IconifyIconOffline icon="close-bold" />
           </span>
-          <div
-            :ref="'schedule' + index"
-            v-if="showModel !== 'card'"
-            :class="[scheduleIsActive(item)]"
-          />
+          <div :ref="'schedule' + index" v-if="showModel !== 'card'" :class="[scheduleIsActive(item)]" />
         </div>
       </div>
     </div>
     <span class="arrow-right">
-      <IconifyIconOffline
-        icon="arrow-right-s-line"
-        @click="handleScroll(-200)"
-      />
+      <IconifyIconOffline icon="arrow-right-s-line" @click="handleScroll(-200)" />
     </span>
     <!-- 右键菜单按钮 -->
     <transition name="el-zoom-in-top">
-      <ul
-        v-show="visible"
-        :key="Math.random()"
-        :style="getContextMenuStyle"
-        class="contextmenu"
-      >
-        <div
-          v-for="(item, key) in tagsViews"
-          :key="key"
-          style="display: flex; align-items: center"
-        >
+      <ul v-show="visible" :key="Math.random()" :style="getContextMenuStyle" class="contextmenu">
+        <div v-for="(item, key) in tagsViews" :key="key" style="display: flex; align-items: center">
           <li v-if="item.show" @click="selectTag(key, item)">
             <component :is="item.icon" :key="key" />
             {{ t(item.text) }}
@@ -711,20 +654,12 @@ const getContextMenuStyle = computed((): CSSProperties => {
     <!-- 右侧功能按钮 -->
     <ul class="right-button">
       <li>
-        <span
-          :title="t('buttons.hsrefreshRoute')"
-          class="el-icon-refresh-right rotate"
-          @click="onFresh"
-        >
+        <span :title="t('buttons.hsrefreshRoute')" class="el-icon-refresh-right rotate" @click="onFresh">
           <IconifyIconOffline icon="refresh-right" />
         </span>
       </li>
       <li>
-        <el-dropdown
-          trigger="click"
-          placement="bottom-end"
-          @command="handleCommand"
-        >
+        <el-dropdown trigger="click" placement="bottom-end" @command="handleCommand">
           <IconifyIconOffline icon="arrow-down" />
           <template #dropdown>
             <el-dropdown-menu>
@@ -735,11 +670,7 @@ const getContextMenuStyle = computed((): CSSProperties => {
                 :divided="item.divided"
                 :disabled="item.disabled"
               >
-                <component
-                  :is="item.icon"
-                  :key="key"
-                  style="margin-right: 6px"
-                />
+                <component :is="item.icon" :key="key" style="margin-right: 6px" />
                 {{ t(item.text) }}
               </el-dropdown-item>
             </el-dropdown-menu>

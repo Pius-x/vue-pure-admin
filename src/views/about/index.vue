@@ -44,11 +44,7 @@ Object.keys(devDependencies).forEach(key => {
         <el-descriptions-item label="版本" label-align="left" align="left">
           <el-tag>{{ version }}</el-tag>
         </el-descriptions-item>
-        <el-descriptions-item
-          label="最后编译时间"
-          label-align="left"
-          align="left"
-        >
+        <el-descriptions-item label="最后编译时间" label-align="left" align="left">
           <el-tag>{{ lastBuildTime }}</el-tag>
         </el-descriptions-item>
         <el-descriptions-item label="文档地址" label-align="left" align="left">
@@ -62,18 +58,13 @@ Object.keys(devDependencies).forEach(key => {
           </a>
         </el-descriptions-item>
         <el-descriptions-item label="Github" label-align="left" align="left">
-          <a
-            href="https://github.com/xiaoxian521/vue-pure-admin"
-            target="_blank"
-          >
+          <a href="https://github.com/xiaoxian521/vue-pure-admin" target="_blank">
             <span style="color: var(--el-color-primary)">Github</span>
           </a>
         </el-descriptions-item>
         <el-descriptions-item label="QQ交流群" label-align="left" align="left">
           <a href="https://jq.qq.com/?_wv=1027&k=HntMx0dt" target="_blank"
-            ><span style="color: var(--el-color-primary)"
-              >点击链接加入群聊【Pure Admin】</span
-            ></a
+            ><span style="color: var(--el-color-primary)">点击链接加入群聊【Pure Admin】</span></a
           >
         </el-descriptions-item>
       </el-descriptions>
@@ -93,10 +84,7 @@ Object.keys(devDependencies).forEach(key => {
           v-for="(item, index) in schema"
           :key="index"
         >
-          <a
-            :href="'https://www.npmjs.com/package/' + item.label"
-            target="_blank"
-          >
+          <a :href="'https://www.npmjs.com/package/' + item.label" target="_blank">
             <span style="color: var(--el-color-primary)">{{ item.field }}</span>
           </a>
         </el-descriptions-item>
@@ -117,10 +105,7 @@ Object.keys(devDependencies).forEach(key => {
           v-for="(item, index) in devSchema"
           :key="index"
         >
-          <a
-            :href="'https://www.npmjs.com/package/' + item.label"
-            target="_blank"
-          >
+          <a :href="'https://www.npmjs.com/package/' + item.label" target="_blank">
             <span style="color: var(--el-color-primary)">{{ item.field }}</span>
           </a>
         </el-descriptions-item>

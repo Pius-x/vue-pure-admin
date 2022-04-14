@@ -32,15 +32,8 @@ const callback = (val: string) => {
       <el-radio label="top" border>Horizontal</el-radio>
       <el-radio label="left" border>Vertical</el-radio>
     </el-radio-group>
-    <Tabs
-      v-model:activeKey="activeKey"
-      :tab-position="mode"
-      :style="{ height: '200px' }"
-      @tabScroll="callback"
-    >
-      <TabPane v-for="i in 30" :key="i" :tab="`Tab-${i}`">
-        Content of tab {{ i }}
-      </TabPane>
+    <Tabs v-model:activeKey="activeKey" :tab-position="mode" :style="{ height: '200px' }" @tabScroll="callback">
+      <TabPane v-for="i in 30" :key="i" :tab="`Tab-${i}`"> Content of tab {{ i }} </TabPane>
     </Tabs>
   </el-card>
 </template>

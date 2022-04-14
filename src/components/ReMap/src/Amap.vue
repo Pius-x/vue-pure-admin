@@ -70,9 +70,7 @@ onBeforeMount(() => {
           let { marker, data } = ctx;
           if (Array.isArray(data) && data[0]) {
             var { driver, plateNumber, orientation } = data[0];
-            var content = `<img style="transform: scale(1) rotate(${
-              360 - Number(orientation)
-            }deg);" src='${car}' />`;
+            var content = `<img style="transform: scale(1) rotate(${360 - Number(orientation)}deg);" src='${car}' />`;
             marker.setContent(content);
             marker.setLabel({
               direction: "bottom",

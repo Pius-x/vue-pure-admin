@@ -69,15 +69,9 @@ const onCurrentChange = (current: number) => {
   pagination.value.current = current;
 };
 const handleDeleteItem = product => {
-  ElMessageBox.confirm(
-    product
-      ? `确认删除后${product.name}的所有产品信息将被清空, 且无法恢复`
-      : "",
-    "提示",
-    {
-      type: "warning"
-    }
-  )
+  ElMessageBox.confirm(product ? `确认删除后${product.name}的所有产品信息将被清空, 且无法恢复` : "", "提示", {
+    type: "warning"
+  })
     .then(() => {
       ElMessage({
         type: "success",
@@ -97,54 +91,30 @@ const handleManageProduct = product => {
 <template>
   <div class="main">
     <div class="w-full flex justify-between mb-4">
-      <el-button :icon="useRenderIcon('add')" @click="formDialogVisible = true"
-        >新建产品</el-button
-      >
-      <el-input
-        style="width: 300px"
-        v-model="searchValue"
-        placeholder="请输入产品名称"
-        clearable
-      >
+      <el-button :icon="useRenderIcon('add')" @click="formDialogVisible = true">新建产品</el-button>
+      <el-input style="width: 300px" v-model="searchValue" placeholder="请输入产品名称" clearable>
         <template #suffix>
           <el-icon class="el-input__icon">
-            <IconifyIconOffline
-              v-show="searchValue.length === 0"
-              icon="search"
-            />
+            <IconifyIconOffline v-show="searchValue.length === 0" icon="search" />
           </el-icon>
         </template>
       </el-input>
     </div>
-    <div
-      v-loading="dataLoading"
-      :element-loading-svg="svg"
-      element-loading-svg-view-box="-10, -10, 50, 50"
-    >
+    <div v-loading="dataLoading" :element-loading-svg="svg" element-loading-svg-view-box="-10, -10, 50, 50">
       <el-empty
         description="暂无数据"
         v-show="
           productList
-            .slice(
-              pagination.pageSize * (pagination.current - 1),
-              pagination.pageSize * pagination.current
-            )
-            .filter(v =>
-              v.name.toLowerCase().includes(searchValue.toLowerCase())
-            ).length === 0
+            .slice(pagination.pageSize * (pagination.current - 1), pagination.pageSize * pagination.current)
+            .filter(v => v.name.toLowerCase().includes(searchValue.toLowerCase())).length === 0
         "
       />
       <template v-if="pagination.total > 0">
         <el-row :gutter="16">
           <el-col
             v-for="(product, index) in productList
-              .slice(
-                pagination.pageSize * (pagination.current - 1),
-                pagination.pageSize * pagination.current
-              )
-              .filter(v =>
-                v.name.toLowerCase().includes(searchValue.toLowerCase())
-              )"
+              .slice(pagination.pageSize * (pagination.current - 1), pagination.pageSize * pagination.current)
+              .filter(v => v.name.toLowerCase().includes(searchValue.toLowerCase()))"
             :key="index"
             :xs="24"
             :sm="12"
@@ -152,11 +122,7 @@ const handleManageProduct = product => {
             :lg="6"
             :xl="4"
           >
-            <ReCard
-              :product="product"
-              @delete-item="handleDeleteItem"
-              @manage-product="handleManageProduct"
-            />
+            <ReCard :product="product" @delete-item="handleDeleteItem" @manage-product="handleManageProduct" />
           </el-col>
         </el-row>
         <el-pagination

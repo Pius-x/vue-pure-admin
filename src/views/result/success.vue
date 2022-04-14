@@ -27,9 +27,7 @@ const { lastBuildTime } = __APP_INFO__;
       <el-descriptions title="项目名称" class="mb-5">
         <el-descriptions-item label="项目 ID：">12345</el-descriptions-item>
         <el-descriptions-item label="负责人：">明明</el-descriptions-item>
-        <el-descriptions-item label="生效时间：">{{
-          lastBuildTime
-        }}</el-descriptions-item>
+        <el-descriptions-item label="生效时间：">{{ lastBuildTime }}</el-descriptions-item>
       </el-descriptions>
       <el-steps :active="2">
         <el-step title="创建项目">

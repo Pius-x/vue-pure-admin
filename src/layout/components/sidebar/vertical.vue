@@ -11,31 +11,21 @@ import { usePermissionStoreHook } from "/@/store/modules/permission";
 
 const route = useRoute();
 const routers = useRouter().options.routes;
-const showLogo = ref(
-  storageLocal.getItem("responsive-configure")?.showLogo ?? true
-);
+const showLogo = ref(storageLocal.getItem("responsive-configure")?.showLogo ?? true);
 
 const { pureApp, isCollapse, menuSelect } = useNav();
 
 let subMenuData = ref([]);
 
 const menuData = computed(() => {
-  return pureApp.layout === "mix"
-    ? subMenuData.value
-    : usePermissionStoreHook().wholeMenus;
+  return pureApp.layout === "mix" ? subMenuData.value : usePermissionStoreHook().wholeMenus;
 });
 
 function getSubMenuData(path) {
   // path的上级路由组成的数组
-  const parentPathArr = getParentPaths(
-    path,
-    usePermissionStoreHook().wholeMenus
-  );
+  const parentPathArr = getParentPaths(path, usePermissionStoreHook().wholeMenus);
   // 当前路由的父级路由信息
-  const parenetRoute = findRouteByPath(
-    parentPathArr[0] || path,
-    usePermissionStoreHook().wholeMenus
-  );
+  const parenetRoute = findRouteByPath(parentPathArr[0] || path, usePermissionStoreHook().wholeMenus);
   if (!parenetRoute?.children) return;
   subMenuData.value = parenetRoute?.children;
 }

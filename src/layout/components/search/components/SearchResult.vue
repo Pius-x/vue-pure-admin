@@ -4,8 +4,7 @@
       <div
         class="result-item"
         :style="{
-          background:
-            item?.path === active ? useEpThemeStoreHook().epThemeColor : '',
+          background: item?.path === active ? useEpThemeStoreHook().epThemeColor : '',
           color: item.path === active ? '#fff' : ''
         }"
         @click="handleTo"

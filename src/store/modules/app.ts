@@ -9,15 +9,12 @@ export const useAppStore = defineStore({
   id: "pure-app",
   state: (): appType => ({
     sidebar: {
-      opened:
-        storageLocal.getItem("responsive-layout")?.sidebarStatus ??
-        getConfig().SidebarStatus,
+      opened: storageLocal.getItem("responsive-layout")?.sidebarStatus ?? getConfig().SidebarStatus,
       withoutAnimation: false,
       isClickHamburger: false
     },
     // 这里的layout用于监听容器拖拉后恢复对应的导航模式
-    layout:
-      storageLocal.getItem("responsive-layout")?.layout ?? getConfig().Layout,
+    layout: storageLocal.getItem("responsive-layout")?.layout ?? getConfig().Layout,
     device: deviceDetection() ? "mobile" : "desktop"
   }),
   getters: {

@@ -70,12 +70,7 @@ let classOption = reactive({
       <li>项目名称</li>
       <li>Star数量</li>
     </ul>
-    <SeamlessScroll
-      ref="scroll"
-      :data="listData"
-      :class-option="classOption"
-      class="warp"
-    >
+    <SeamlessScroll ref="scroll" :data="listData" :class-option="classOption" class="warp">
       <ul class="item">
         <li v-for="(item, index) in listData" :key="index">
           <span v-text="item.date" />

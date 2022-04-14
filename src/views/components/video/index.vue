@@ -15,8 +15,7 @@ onMounted(() => {
     autoplay: false,
     screenShot: true,
     url: "https://sf1-hscdn-tos.pstatp.com/obj/media-fe/xgplayer_doc_video/mp4/xgplayer-demo-720p.mp4",
-    poster:
-      "https://s2.pstatp.com/cdn/expire-1-M/byted-player-videos/1.0.0/poster.jpg",
+    poster: "https://s2.pstatp.com/cdn/expire-1-M/byted-player-videos/1.0.0/poster.jpg",
     fluid: deviceDetection(),
     controlPlugins: [volume, playbackRate, screenShot],
     //传入倍速可选数组

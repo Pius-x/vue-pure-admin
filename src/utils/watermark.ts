@@ -1,11 +1,4 @@
-import {
-  ref,
-  Ref,
-  unref,
-  shallowRef,
-  onBeforeUnmount,
-  getCurrentInstance
-} from "vue";
+import { ref, Ref, unref, shallowRef, onBeforeUnmount, getCurrentInstance } from "vue";
 import { isDef } from "/@/utils/is";
 import { useRafThrottle } from "/@/utils/operate";
 import { addResizeListener, removeResizeListener } from "/@/utils/resize";
@@ -17,9 +10,7 @@ type attr = {
   fillStyle?: string;
 };
 
-export function useWatermark(
-  appendEl: Ref<HTMLElement | null> = ref(document.body) as Ref<HTMLElement>
-) {
+export function useWatermark(appendEl: Ref<HTMLElement | null> = ref(document.body) as Ref<HTMLElement>) {
   const func = useRafThrottle(function () {
     const el = unref(appendEl);
     if (!el) return;
@@ -73,10 +64,7 @@ export function useWatermark(
       el.style.height = `${options.height}px`;
     }
     if (isDef(options.str)) {
-      el.style.background = `url(${createBase64(
-        options.str,
-        options.attr
-      )}) left top repeat`;
+      el.style.background = `url(${createBase64(options.str, options.attr)}) left top repeat`;
     }
   }
 

@@ -1,14 +1,5 @@
 <script setup lang="ts">
-import {
-  reactive,
-  ref,
-  unref,
-  watch,
-  computed,
-  nextTick,
-  useCssModule,
-  getCurrentInstance
-} from "vue";
+import { reactive, ref, unref, watch, computed, nextTick, useCssModule, getCurrentInstance } from "vue";
 import { find } from "lodash-unified";
 import { getConfig } from "/@/config";
 import { useRouter } from "vue-router";
@@ -31,11 +22,9 @@ import darkIcon from "/@/assets/svg/dark.svg?component";
 const router = useRouter();
 const { isSelect } = useCssModule();
 const body = document.documentElement as HTMLElement;
-const instance =
-  getCurrentInstance().appContext.app.config.globalProperties.$storage;
+const instance = getCurrentInstance().appContext.app.config.globalProperties.$storage;
 
-const instanceConfig =
-  getCurrentInstance().appContext.app.config.globalProperties.$config;
+const instanceConfig = getCurrentInstance().appContext.app.config.globalProperties.$config;
 
 let themeColors = ref<Array<themeColorsType>>([
   // 道奇蓝（默认）
@@ -122,11 +111,7 @@ const greyChange = (value): void => {
 
 // 色弱模式设置
 const weekChange = (value): void => {
-  toggleClass(
-    settings.weakVal,
-    "html-weakness",
-    document.querySelector("html")
-  );
+  toggleClass(settings.weakVal, "html-weakness", document.querySelector("html"));
   storageConfigureChange("weak", value);
 };
 
@@ -173,9 +158,7 @@ function onChange(label) {
 
 // 侧边栏Logo
 function logoChange() {
-  unref(logoVal)
-    ? storageConfigureChange("showLogo", true)
-    : storageConfigureChange("showLogo", false);
+  unref(logoVal) ? storageConfigureChange("showLogo", true) : storageConfigureChange("showLogo", false);
   emitter.emit("logoChange", unref(logoVal));
 }
 
@@ -208,15 +191,9 @@ watch(instance, ({ layout }) => {
 // 主题色 激活选择项
 const getThemeColor = computed(() => {
   return current => {
-    if (
-      current === layoutTheme.value.theme &&
-      layoutTheme.value.theme !== "light"
-    ) {
+    if (current === layoutTheme.value.theme && layoutTheme.value.theme !== "light") {
       return "#fff";
-    } else if (
-      current === layoutTheme.value.theme &&
-      layoutTheme.value.theme === "light"
-    ) {
+    } else if (current === layoutTheme.value.theme && layoutTheme.value.theme === "light") {
       return "#1d2b45";
     } else {
       return "transparent";
@@ -294,10 +271,8 @@ function dataThemeChange() {
 
 //初始化项目配置
 nextTick(() => {
-  settings.greyVal &&
-    document.querySelector("html")?.setAttribute("class", "html-grey");
-  settings.weakVal &&
-    document.querySelector("html")?.setAttribute("class", "html-weakness");
+  settings.greyVal && document.querySelector("html")?.setAttribute("class", "html-grey");
+  settings.weakVal && document.querySelector("html")?.setAttribute("class", "html-weakness");
   settings.tabsVal && tagsChange();
   // @ts-expect-error
   writeNewStyle(createNewStyle(epThemeColor.value));
@@ -342,11 +317,7 @@ nextTick(() => {
       </el-tooltip>
 
       <el-tooltip class="item" content="混合模式" placement="bottom">
-        <li
-          :class="layoutTheme.layout === 'mix' ? $style.isSelect : ''"
-          ref="mixRef"
-          @click="setLayoutModel('mix')"
-        >
+        <li :class="layoutTheme.layout === 'mix' ? $style.isSelect : ''" ref="mixRef" @click="setLayoutModel('mix')">
           <div />
           <div />
         </li>
@@ -361,11 +332,7 @@ nextTick(() => {
         :style="getThemeColorStyle(item.color)"
         @click="setLayoutThemeColor(item.themeColor)"
       >
-        <el-icon
-          style="margin: 0.1em 0.1em 0 0"
-          :size="17"
-          :color="getThemeColor(item.themeColor)"
-        >
+        <el-icon style="margin: 0.1em 0.1em 0 0" :size="17" :color="getThemeColor(item.themeColor)">
           <IconifyIconOffline icon="check" />
         </el-icon>
       </li>
@@ -441,17 +408,8 @@ nextTick(() => {
     </ul>
 
     <el-divider />
-    <el-button
-      type="danger"
-      style="width: 90%; margin: 24px 15px"
-      @click="onReset"
-    >
-      <IconifyIconOffline
-        icon="fa-sign-out"
-        width="15"
-        height="15"
-        style="margin-right: 4px"
-      />
+    <el-button type="danger" style="width: 90%; margin: 24px 15px" @click="onReset">
+      <IconifyIconOffline icon="fa-sign-out" width="15" height="15" style="margin-right: 4px" />
       清空缓存并返回登录页</el-button
     >
   </panel>

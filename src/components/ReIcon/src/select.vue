@@ -39,10 +39,7 @@ let pageList = computed(() => {
       .filter(v => v.includes(filterValue.value));
   } else {
     return copyIconList[currentActiveType.value]
-      .slice(
-        pageSize.value * (currentPage.value - 1),
-        pageSize.value * (currentPage.value - 1) + pageSize.value
-      )
+      .slice(pageSize.value * (currentPage.value - 1), pageSize.value * (currentPage.value - 1) + pageSize.value)
       .filter(v => v.includes(filterValue.value));
   }
 });
@@ -60,8 +57,7 @@ const iconItemStyle = computed((): ParameterCSSProperties => {
 function handleClick({ props }) {
   currentPage.value = 1;
   currentActiveType.value = props.name;
-  inputValue.value =
-    currentActiveType.value + iconList.value[currentActiveType.value][0];
+  inputValue.value = currentActiveType.value + iconList.value[currentActiveType.value][0];
   icon.value = iconList.value[currentActiveType.value][0];
 }
 
@@ -81,28 +77,16 @@ function onCurrentChange(page) {
       <template #append>
         <el-popover :width="350" trigger="click" popper-class="pure-popper">
           <template #reference>
-            <div
-              class="w-40px h-32px cursor-pointer flex justify-center items-center"
-            >
+            <div class="w-40px h-32px cursor-pointer flex justify-center items-center">
               <IconifyIconOnline :icon="icon" :type="currentActiveType" />
             </div>
           </template>
 
-          <el-input
-            class="p-2"
-            v-model="filterValue"
-            placeholder="搜索图标"
-            clearable
-          />
+          <el-input class="p-2" v-model="filterValue" placeholder="搜索图标" clearable />
           <el-divider border-style="dashed" />
 
           <el-tabs v-model="currentActiveType" @tab-click="handleClick">
-            <el-tab-pane
-              v-for="(pane, index) in tabsList"
-              :key="index"
-              :label="pane.label"
-              :name="pane.name"
-            >
+            <el-tab-pane v-for="(pane, index) in tabsList" :key="index" :label="pane.label" :name="pane.name">
               <el-divider class="tab-divider" border-style="dashed" />
               <el-scrollbar height="220px">
                 <ul class="flex flex-wrap px-2 ml-2">

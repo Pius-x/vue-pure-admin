@@ -1,11 +1,5 @@
 import Axios, { AxiosInstance, AxiosRequestConfig } from "axios";
-import {
-  resultType,
-  PureHttpError,
-  RequestMethods,
-  PureHttpResponse,
-  PureHttpRequestConfig
-} from "./types.d";
+import { resultType, PureHttpError, RequestMethods, PureHttpResponse, PureHttpRequestConfig } from "./types.d";
 import qs from "qs";
 import NProgress from "../progress";
 // import { loadEnv } from "@build/index";
@@ -145,20 +139,12 @@ class PureHttp {
   }
 
   // 单独抽离的post工具函数
-  public post<T, P>(
-    url: string,
-    params?: T,
-    config?: PureHttpRequestConfig
-  ): Promise<P> {
+  public post<T, P>(url: string, params?: T, config?: PureHttpRequestConfig): Promise<P> {
     return this.request<P>("post", url, params, config);
   }
 
   // 单独抽离的get工具函数
-  public get<T, P>(
-    url: string,
-    params?: T,
-    config?: PureHttpRequestConfig
-  ): Promise<P> {
+  public get<T, P>(url: string, params?: T, config?: PureHttpRequestConfig): Promise<P> {
     return this.request<P>("get", url, params, config);
   }
 }

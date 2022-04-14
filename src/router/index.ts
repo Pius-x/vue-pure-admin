@@ -9,14 +9,7 @@ import { storageSession } from "/@/utils/storage";
 import { buildHierarchyTree } from "/@/utils/tree";
 import { useMultiTagsStoreHook } from "/@/store/modules/multiTags";
 import { usePermissionStoreHook } from "/@/store/modules/permission";
-import {
-  Router,
-  RouteMeta,
-  createRouter,
-  RouteRecordRaw,
-  RouteComponent,
-  RouteRecordName
-} from "vue-router";
+import { Router, RouteMeta, createRouter, RouteRecordRaw, RouteComponent, RouteRecordName } from "vue-router";
 import {
   ascending,
   initRouter,
@@ -62,9 +55,7 @@ export const constantRoutes: Array<RouteRecordRaw> = formatTwoStageRoutes(
 );
 
 // 用于渲染菜单，保持原始层级
-export const constantMenus: Array<RouteComponent> = ascending(routes).concat(
-  ...remainingRouter
-);
+export const constantMenus: Array<RouteComponent> = ascending(routes).concat(...remainingRouter);
 
 // 不参与菜单的路由
 export const remainingPaths = Object.keys(remainingRouter).map(v => {
@@ -82,8 +73,7 @@ export const router: Router = createRouter({
         return savedPosition;
       } else {
         if (from.meta.saveSrollTop) {
-          const top: number =
-            document.documentElement.scrollTop || document.body.scrollTop;
+          const top: number = document.documentElement.scrollTop || document.body.scrollTop;
           resolve({ left: 0, top });
         }
       }
@@ -110,11 +100,7 @@ router.beforeEach((to: toRouteType, _from, next) => {
     to.matched.some(item => {
       if (!item.meta.title) return "";
       const Title = getConfig().Title;
-      if (Title)
-        document.title = `${transformI18n(
-          item.meta.title,
-          item.meta?.i18n
-        )} | ${Title}`;
+      if (Title) document.title = `${transformI18n(item.meta.title, item.meta?.i18n)} | ${Title}`;
       else document.title = transformI18n(item.meta.title, item.meta?.i18n);
     });
   if (name) {
@@ -131,12 +117,7 @@ router.beforeEach((to: toRouteType, _from, next) => {
       if (usePermissionStoreHook().wholeMenus.length === 0)
         initRouter(name.username).then((router: Router) => {
           if (!useMultiTagsStoreHook().getMultiTagsCache) {
-            const handTag = (
-              path: string,
-              parentPath: string,
-              name: RouteRecordName,
-              meta: RouteMeta
-            ): void => {
+            const handTag = (path: string, parentPath: string, name: RouteRecordName, meta: RouteMeta): void => {
               useMultiTagsStoreHook().handleTags("push", {
                 path,
                 parentPath,
@@ -149,35 +130,20 @@ router.beforeEach((to: toRouteType, _from, next) => {
               const routes = router.options.routes;
               const { refreshRedirect } = to.meta;
               const { name, meta } = findRouteByPath(refreshRedirect, routes);
-              handTag(
-                refreshRedirect,
-                getParentPaths(refreshRedirect, routes)[1],
-                name,
-                meta
-              );
+              handTag(refreshRedirect, getParentPaths(refreshRedirect, routes)[1], name, meta);
               return router.push(refreshRedirect);
             } else {
               const { path } = to;
               const index = findIndex(remainingRouter, v => {
                 return v.path == path;
               });
-              const routes =
-                index === -1
-                  ? router.options.routes[0].children
-                  : router.options.routes;
+              const routes = index === -1 ? router.options.routes[0].children : router.options.routes;
               const route = findRouteByPath(path, routes);
               const routePartent = getParentPaths(path, routes);
               // 未开启标签页缓存，刷新页面重定向到顶级路由（参考标签页操作例子，只针对动态路由）
-              if (
-                path !== routes[0].path &&
-                route?.meta?.rank !== 0 &&
-                routePartent.length === 0
-              ) {
+              if (path !== routes[0].path && route?.meta?.rank !== 0 && routePartent.length === 0) {
                 if (!route?.meta?.refreshRedirect) return;
-                const { name, meta } = findRouteByPath(
-                  route.meta.refreshRedirect,
-                  routes
-                );
+                const { name, meta } = findRouteByPath(route.meta.refreshRedirect, routes);
                 handTag(
                   route.meta?.refreshRedirect,
                   getParentPaths(route.meta?.refreshRedirect, routes)[0],
@@ -186,12 +152,7 @@ router.beforeEach((to: toRouteType, _from, next) => {
                 );
                 return router.push(route.meta?.refreshRedirect);
               } else {
-                handTag(
-                  route.path,
-                  routePartent[routePartent.length - 1],
-                  route.name,
-                  route.meta
-                );
+                handTag(route.path, routePartent[routePartent.length - 1], route.name, route.meta);
                 return router.push(path);
               }
             }

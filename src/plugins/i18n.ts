@@ -9,12 +9,10 @@ import zhLocale from "element-plus/lib/locale/lang/zh-cn";
 
 function siphonI18n(prefix = "zh-CN") {
   return Object.fromEntries(
-    Object.entries(import.meta.globEager("../../locales/*.y(a)?ml")).map(
-      ([key, value]) => {
-        const matched = key.match(/([A-Za-z0-9-_]+)\./i)[1];
-        return [matched, value.default];
-      }
-    )
+    Object.entries(import.meta.globEager("../../locales/*.y(a)?ml")).map(([key, value]) => {
+      const matched = key.match(/([A-Za-z0-9-_]+)\./i)[1];
+      return [matched, value.default];
+    })
   )[prefix];
 }
 
@@ -35,18 +33,14 @@ export const localesConfigs = {
  * @param isI18n  如果true,获取对应的消息,否则返回本身
  * @returns message
  */
-export function transformI18n(
-  message: string | unknown | object = "",
-  isI18n: boolean | unknown = false
-) {
+export function transformI18n(message: string | unknown | object = "", isI18n: boolean | unknown = false) {
   if (!message) {
     return "";
   }
 
   // 处理存储动态路由的title,格式 {zh:"",en:""}
   if (typeof message === "object") {
-    const locale: string | WritableComputedRef<string> | any =
-      i18n.global.locale;
+    const locale: string | WritableComputedRef<string> | any = i18n.global.locale;
     return message[locale?.value];
   }
 

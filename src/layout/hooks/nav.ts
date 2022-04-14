@@ -37,8 +37,7 @@ export function useNav() {
   // 动态title
   function changeTitle(meta: routeMetaType) {
     const Title = getConfig().Title;
-    if (Title)
-      document.title = `${transformI18n(meta.title, meta.i18n)} | ${Title}`;
+    if (Title) document.title = `${transformI18n(meta.title, meta.i18n)} | ${Title}`;
     else document.title = transformI18n(meta.title, meta.i18n);
   }
 

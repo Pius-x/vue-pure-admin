@@ -9,9 +9,7 @@ const { isFullscreen, toggle } = useFullscreen();
 <template>
   <div class="screen-full" @click="toggle">
     <FontIcon
-      :title="
-        isFullscreen ? t('buttons.hsexitfullscreen') : t('buttons.hsfullscreen')
-      "
+      :title="isFullscreen ? t('buttons.hsexitfullscreen') : t('buttons.hsfullscreen')"
       :icon="isFullscreen ? 'team-iconexit-fullscreen' : 'team-iconfullscreen'"
     />
   </div>

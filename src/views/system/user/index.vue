@@ -175,10 +175,7 @@ const gridOptions = reactive({
               page: {
                 total: list.length
               },
-              result: list.slice(
-                (page.currentPage - 1) * page.pageSize,
-                page.currentPage * page.pageSize
-              )
+              result: list.slice((page.currentPage - 1) * page.pageSize, page.currentPage * page.pageSize)
             });
           }, 100);
         });

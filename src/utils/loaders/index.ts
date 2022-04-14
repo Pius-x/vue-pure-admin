@@ -29,9 +29,7 @@ class loaderProxy implements ProxyLoader {
     }
   };
 
-  public loadScriptConcurrent = async (
-    srcList: Array<string>
-  ): Promise<any> => {
+  public loadScriptConcurrent = async (srcList: Array<string>): Promise<any> => {
     if (Array.isArray(srcList)) {
       const len: number = srcList.length;
       if (len > 0) {

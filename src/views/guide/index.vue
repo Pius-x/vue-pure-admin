@@ -68,18 +68,10 @@ const guide = () => {
   <el-card>
     <template #header>
       <div class="card-header">
-        <span class="font-medium"
-          >引导页对于一些第一次进入项目的人很有用，你可以简单介绍下项目的功能</span
-        >
+        <span class="font-medium">引导页对于一些第一次进入项目的人很有用，你可以简单介绍下项目的功能</span>
       </div>
     </template>
-    <el-button
-      type="primary"
-      style="margin-top: 10px"
-      @click.prevent.stop="guide"
-    >
-      打开引导页
-    </el-button>
+    <el-button type="primary" style="margin-top: 10px" @click.prevent.stop="guide"> 打开引导页 </el-button>
   </el-card>
 </template>
 

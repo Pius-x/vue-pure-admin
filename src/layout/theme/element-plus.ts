@@ -26,26 +26,19 @@ export const writeNewStyle = (newStyle: string): void => {
 };
 
 // 根据主题色，生成最新的样式表
-export const createNewStyle = (
-  primaryStyle: Record<string, any>
-): Record<string, any> => {
+export const createNewStyle = (primaryStyle: Record<string, any>): Record<string, any> => {
   // 根据主色生成色值表
   const colors = createColors(primaryStyle);
   // 在当前ep的默认样式表中标记需要替换的色值
   let cssText = getStyleTemplate(epCss);
   // 遍历生成的色值表，在 默认样式表 进行全局替换
   Object.keys(colors).forEach(key => {
-    cssText = cssText.replace(
-      new RegExp("(:|\\s+)" + key, "g"),
-      "$1" + colors[key]
-    );
+    cssText = cssText.replace(new RegExp("(:|\\s+)" + key, "g"), "$1" + colors[key]);
   });
   return cssText;
 };
 
-export const createColors = (
-  primary: Record<string, any>
-): Record<string, any> => {
+export const createColors = (primary: Record<string, any>): Record<string, any> => {
   if (!primary) return;
   const colors = {
     primary

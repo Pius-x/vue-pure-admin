@@ -23,13 +23,9 @@ export const usePermissionStore = defineStore({
     // 获取异步路由菜单
     asyncActionRoutes(routes) {
       if (this.wholeMenus.length > 0) return;
-      this.wholeMenus = filterTree(
-        ascending(this.constantMenus.concat(routes))
-      );
+      this.wholeMenus = filterTree(ascending(this.constantMenus.concat(routes)));
 
-      this.menusTree = cloneDeep(
-        filterTree(ascending(this.constantMenus.concat(routes)))
-      );
+      this.menusTree = cloneDeep(filterTree(ascending(this.constantMenus.concat(routes))));
 
       const getButtonAuth = (arrRoutes: Array<RouteConfigs>) => {
         if (!arrRoutes || !arrRoutes.length) return;

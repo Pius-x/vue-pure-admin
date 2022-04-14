@@ -1,6 +1,4 @@
-@mixin merge-style(
-  /* vertical模式下主体内容距离网页文档左侧的距离 */ $sideBarWidth
-) {
+@mixin merge-style(/* vertical模式下主体内容距离网页文档左侧的距离 */ $sideBarWidth) {
   $menuActiveText: #7a80b4;
 
   @media screen and (min-width: 150px) and (max-width: 420px) {
@@ -67,8 +65,7 @@
     }
 
     .horizontal-collapse-transition {
-      transition: 0s width ease-in-out, 0s padding-left ease-in-out,
-        0s padding-right ease-in-out;
+      transition: 0s width ease-in-out, 0s padding-left ease-in-out, 0s padding-right ease-in-out;
     }
 
     .el-scrollbar__bar.is-vertical {
@@ -484,9 +481,7 @@
   }
 
   /* 有子菜单 */
-  .el-menu--collapse
-    .is-active.outer-most.el-sub-menu
-    > .el-sub-menu__title::before {
+  .el-menu--collapse .is-active.outer-most.el-sub-menu > .el-sub-menu__title::before {
     position: absolute;
     top: 0;
     left: 0;
