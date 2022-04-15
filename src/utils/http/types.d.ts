@@ -1,18 +1,15 @@
-import Axios, {
-  Method,
-  AxiosError,
-  AxiosResponse,
-  AxiosRequestConfig
-} from "axios";
+import Axios, { Method, AxiosError, AxiosResponse, AxiosRequestConfig } from "axios";
 
 export type resultType = {
   accessToken?: string;
 };
+export interface ResponseType extends Promise<any> {
+  code: number; //错误码
+  info?: object | any[]; //返回的数据
+  msg?: string; //附带信息
+}
 
-export type RequestMethods = Extract<
-  Method,
-  "get" | "post" | "put" | "delete" | "patch" | "option" | "head"
->;
+export type RequestMethods = Extract<Method, "get" | "post" | "put" | "delete" | "patch" | "option" | "head">;
 
 export interface PureHttpError extends AxiosError {
   isCancelRequest?: boolean;
@@ -34,14 +31,6 @@ export default class PureHttp {
     param?: AxiosRequestConfig,
     axiosConfig?: PureHttpRequestConfig
   ): Promise<T>;
-  post<T, P>(
-    url: string,
-    params?: T,
-    config?: PureHttpRequestConfig
-  ): Promise<P>;
-  get<T, P>(
-    url: string,
-    params?: T,
-    config?: PureHttpRequestConfig
-  ): Promise<P>;
+  post<T, P>(url: string, params?: T, config?: PureHttpRequestConfig): Promise<P>;
+  get<T, P>(url: string, params?: T, config?: PureHttpRequestConfig): Promise<P>;
 }

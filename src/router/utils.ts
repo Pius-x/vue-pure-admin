@@ -18,7 +18,7 @@ const IFrame = () => import("/@/layout/frameView.vue");
 const modulesRoutes = import.meta.glob("/src/views/**/*.{vue,tsx}");
 
 // 动态路由
-import { getAsyncRoutes } from "/@/api/routes";
+import { http } from "/@/utils/http";
 
 // 按照路由中meta下的rank等级升序来排序路由
 function ascending(arr: any[]) {
@@ -107,7 +107,7 @@ function resetRouter(): void {
 // 初始化路由
 function initRouter(name: string) {
   return new Promise(resolve => {
-    getAsyncRoutes({ name }).then(({ info }) => {
+    http.get("/getAsyncRoutes", { name }).then(({ info }) => {
       if (info.length === 0) {
         usePermissionStoreHook().changeSetting(info);
       } else {
