@@ -1,7 +1,8 @@
 <script setup lang="ts">
-import { ReGithub, ReInfinite, RePie, ReLine, ReBar } from "/@/components/ReCharts/index";
+import { ReGithub, ReInfinite, RePie, ReLine, ReBar } from "/@/components/ReCharts";
 import { ref, computed } from "vue";
 import avatars from "/@/assets/avatars.jpg";
+import { http } from "/@/utils/http";
 
 const date: Date = new Date();
 let loading = ref<boolean>(true);
@@ -21,7 +22,10 @@ let greetings = computed(() => {
 });
 
 const openDepot = (): void => {
-  window.open("https://github.com/xiaoxian521/vue-pure-admin");
+  http.post("/ping", { a: 1, b: "sss" }).then((res: any) => {
+    console.log(res);
+  });
+  // window.open("https://github.com/xiaoxian521/vue-pure-admin");
 };
 </script>
 
@@ -139,17 +143,8 @@ const openDepot = (): void => {
         :xl="8"
         style="margin-bottom: 20px"
         v-motion
-        :initial="{
-          opacity: 0,
-          y: 100
-        }"
-        :enter="{
-          opacity: 1,
-          y: 0,
-          transition: {
-            delay: 400
-          }
-        }"
+        :initial="{ opacity: 0, y: 100 }"
+        :enter="{ opacity: 1, y: 0, transition: { delay: 400 } }"
       >
         <el-card>
           <template #header>
