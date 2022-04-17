@@ -410,6 +410,16 @@ const routes = [
     },
     children: [
       {
+        //标签页组件
+        path: "/components/tabs",
+        name: "tabs",
+        component: () => import("/@/views/components/tabs/index.vue"),
+        meta: {
+          title: $t("menus.hstabList"),
+          i18n: true
+        }
+      },
+      {
         path: "/components/video",
         name: "video",
         component: () => import("/@/views/components/video/index.vue"),

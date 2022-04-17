@@ -33,6 +33,7 @@ menus:
   hsFive: "500"
   hscomponents: Components
   hsvideo: Video Components
+  hstabList: Tab List
   hsmap: Map Components
   hsdraggable: Draggable Components
   hssplitPane: Split Pane

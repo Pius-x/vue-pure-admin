@@ -33,6 +33,7 @@ menus:
   hsFive: "500"
   hscomponents: 组件
   hsvideo: 视频组件
+  hstabList: 标签页组件
   hsmap: 地图组件
   hsdraggable: 拖拽组件
   hssplitPane: 切割面板
