@@ -6,36 +6,22 @@ export default {
 
 <script setup lang="ts">
 import dayjs from "dayjs";
-import { loadingSvg } from "../load";
 import { handleTree } from "/@/utils/tree";
 import { getDeptList } from "/@/api/system";
 import { FormInstance } from "element-plus";
-import { reactive, ref, onMounted, computed } from "vue";
-import { useEpThemeStoreHook } from "/@/store/modules/epTheme";
+import { reactive, ref, onMounted } from "vue";
+import { EpTableProBar } from "/@/components/ReTable";
 import { useRenderIcon } from "/@/components/ReIcon/src/hooks";
 
 const form = reactive({
   user: "",
   status: ""
 });
-const buttonRef = ref();
-const tooltipRef = ref();
-let treeData = ref([]);
-let checkList = ref([]);
+let dataList = ref([]);
 let loading = ref(true);
-let visible = ref(false);
-let size = ref("default");
 
 const formRef = ref<FormInstance>();
-
-const getDropdownItemStyle = computed(() => {
-  return s => {
-    return {
-      background: s === size.value ? useEpThemeStoreHook().epThemeColor : "",
-      color: s === size.value ? "#f4f4f5" : "#000"
-    };
-  };
-});
+const tableRef = ref();
 
 function handleUpdate(row) {
   console.log(row);
@@ -45,10 +31,6 @@ function handleDelete(row) {
   console.log(row);
 }
 
-function onCheckChange(val) {
-  console.log("onCheckChange", val);
-}
-
 function handleSelectionChange(val) {
   console.log("handleSelectionChange", val);
 }
@@ -56,7 +38,7 @@ function handleSelectionChange(val) {
 async function onSearch() {
   loading.value = true;
   let { data } = await getDeptList();
-  treeData.value = handleTree(data);
+  dataList.value = handleTree(data);
   setTimeout(() => {
     loading.value = false;
   }, 500);
@@ -86,17 +68,33 @@ onMounted(() => {
         </el-select>
       </el-form-item>
       <el-form-item>
+<<<<<<< HEAD
         <el-button type="primary" :icon="useRenderIcon('search')" :loading="loading" @click="onSearch"> 搜索</el-button>
         <el-button :icon="useRenderIcon('refresh')" @click="resetForm(formRef)">重置</el-button>
+=======
+        <el-button
+          type="primary"
+          :icon="useRenderIcon('search')"
+          :loading="loading"
+          @click="onSearch"
+        >
+          搜索
+        </el-button>
+        <el-button :icon="useRenderIcon('refresh')" @click="resetForm(formRef)">
+          重置
+        </el-button>
+>>>>>>> 9271997a30677fb92d809abca9f01160625bcfb8
       </el-form-item>
     </el-form>
 
-    <div
-      class="w-99/100 mt-6 p-2 bg-white"
-      v-loading="loading"
-      :element-loading-svg="loadingSvg"
-      element-loading-svg-view-box="-10, -10, 50, 50"
+    <EpTableProBar
+      title="部门列表"
+      :loading="loading"
+      :tableRef="tableRef"
+      :dataList="dataList"
+      @refresh="onSearch"
     >
+<<<<<<< HEAD
       <div class="flex justify-between w-full h-60px p-4">
         <p class="font-bold">部门列表</p>
         <div class="w-220px flex items-center justify-around">
@@ -211,5 +209,101 @@ onMounted(() => {
         </el-table-column>
       </el-table>
     </div>
+=======
+      <template #buttons>
+        <el-button type="primary" :icon="useRenderIcon('add')">
+          新增部门
+        </el-button>
+      </template>
+      <template v-slot="{ size, checkList }">
+        <el-table
+          ref="tableRef"
+          border
+          row-key="id"
+          table-layout="auto"
+          default-expand-all
+          :size="size"
+          :data="dataList"
+          :header-cell-style="{ background: '#fafafa', color: '#606266' }"
+          @selection-change="handleSelectionChange"
+        >
+          <el-table-column
+            v-if="checkList.includes('勾选列')"
+            type="selection"
+            align="center"
+            width="55"
+          />
+          <el-table-column
+            v-if="checkList.includes('序号列')"
+            type="index"
+            align="center"
+            label="序号"
+            width="60"
+          />
+          <el-table-column label="部门名称" prop="name" width="180" />
+          <el-table-column label="排序" align="center" prop="sort" width="60" />
+          <el-table-column label="状态" align="center" prop="status" width="80">
+            <template #default="scope">
+              <el-tag
+                :size="size"
+                :type="scope.row.status === 0 ? 'danger' : 'success'"
+                effect="plain"
+              >
+                {{ scope.row.status === 0 ? "关闭" : "开启" }}
+              </el-tag>
+            </template>
+          </el-table-column>
+          <el-table-column
+            label="创建时间"
+            align="center"
+            width="180"
+            prop="createTime"
+            :formatter="
+              ({ createTime }) => {
+                return dayjs(createTime).format('YYYY-MM-DD HH:mm:ss');
+              }
+            "
+          />
+          <el-table-column
+            label="备注"
+            align="center"
+            prop="remark"
+            show-overflow-tooltip
+          />
+          <el-table-column
+            fixed="right"
+            label="操作"
+            align="center"
+            width="140"
+          >
+            <template #default="scope">
+              <el-button
+                class="reset-margin"
+                type="text"
+                :size="size"
+                @click="handleUpdate(scope.row)"
+                :icon="useRenderIcon('edits')"
+              >
+                修改
+              </el-button>
+              <el-popconfirm title="是否确认删除?">
+                <template #reference>
+                  <el-button
+                    class="reset-margin"
+                    type="text"
+                    :size="size"
+                    :icon="useRenderIcon('delete')"
+                    @click="handleDelete(scope.row)"
+                  >
+                    删除
+                  </el-button>
+                </template>
+              </el-popconfirm>
+            </template>
+          </el-table-column>
+        </el-table>
+      </template>
+    </EpTableProBar>
+>>>>>>> 9271997a30677fb92d809abca9f01160625bcfb8
   </div>
 </template>
