@@ -1,5 +1,6 @@
 import { $t } from "/@/plugins/i18n";
 const Layout = () => import("/@/layout/index.vue");
+const IFrame = () => import("/@/layout/frameView.vue");
 
 const routes = [
   {
@@ -24,123 +25,6 @@ const routes = [
           title: $t("menus.hshome"),
           i18n: true,
           showLink: true // 是否在菜单中显示（可不写，默认true）
-        }
-      }
-    ]
-  },
-  {
-    path: "/able",
-    component: Layout,
-    redirect: "/able/watermark",
-    meta: {
-      icon: "ubuntu-fill",
-      title: $t("menus.hsAble"),
-      i18n: true,
-      rank: 3
-    },
-    children: [
-      {
-        path: "/able/watermark",
-        name: "reWatermark",
-        component: () => import("/@/views/able/watermark.vue"),
-        meta: {
-          title: $t("menus.hsWatermark"),
-          i18n: true
-        }
-      },
-      {
-        path: "/able/print",
-        name: "rePrint",
-        component: () => import("/@/views/able/print.vue"),
-        meta: {
-          title: $t("menus.hsPrint"),
-          i18n: true
-        }
-      },
-      {
-        path: "/able/iconSelect",
-        name: "reIconSelect",
-        component: () => import("/@/views/able/icon-select.vue"),
-        meta: {
-          title: $t("menus.hsIconSelect"),
-          i18n: true
-        }
-      },
-      {
-        path: "/able/timeline",
-        name: "reTimeline",
-        component: () => import("/@/views/able/timeline.vue"),
-        meta: {
-          title: $t("menus.hsTimeline"),
-          i18n: true
-        }
-      },
-      {
-        path: "/able/menuTree",
-        name: "reMenuTree",
-        component: () => import("/@/views/able/menu-tree.vue"),
-        meta: {
-          title: $t("menus.hsMenuTree"),
-          i18n: true
-        }
-      },
-      {
-        path: "/able/lineTree",
-        name: "reLineTree",
-        component: () => import("/@/views/able/line-tree.vue"),
-        meta: {
-          title: $t("menus.hsLineTree"),
-          i18n: true
-        }
-      },
-      {
-        path: "/able/antTabs",
-        name: "reAntTabs",
-        component: () => import("/@/views/able/ant-tabs.vue"),
-        meta: {
-          title: $t("menus.hsAntTabs"),
-          i18n: true
-        }
-      },
-      {
-        path: "/able/antAnchor",
-        name: "reAntAnchor",
-        component: () => import("/@/views/able/ant-anchor.vue"),
-        meta: {
-          title: $t("menus.hsAntAnchor"),
-          i18n: true
-        }
-      },
-      {
-        path: "/able/antTreeSelect",
-        name: "reAntTreeSelect",
-        component: () => import("/@/views/able/ant-treeSelect.vue"),
-        meta: {
-          title: $t("menus.hsAntTreeSelect"),
-          i18n: true
-        }
-      }
-    ]
-  },
-  {
-    path: "/list",
-    component: Layout,
-    redirect: "/list/card",
-    meta: {
-      icon: "list-check",
-      title: $t("menus.list"),
-      i18n: true,
-      rank: 12
-    },
-    children: [
-      {
-        path: "/list/card",
-        name: "listCard",
-        component: () => import("/@/views/list/card/index.vue"),
-        meta: {
-          title: $t("menus.listCard"),
-          i18n: true,
-          showParent: true
         }
       }
     ]
@@ -350,33 +234,6 @@ const routes = [
     ]
   },
   {
-    path: "/editor",
-    component: Layout,
-    redirect: "/editor/index",
-    meta: {
-      icon: "edit",
-      title: $t("menus.hseditor"),
-      i18n: true,
-      rank: 2
-    },
-    children: [
-      {
-        path: "/editor/index",
-        name: "reEditor",
-        component: () => import("/@/views/editor/index.vue"),
-        meta: {
-          title: $t("menus.hseditor"),
-          i18n: true,
-          keepAlive: true,
-          extraIcon: {
-            svg: true,
-            name: "team-iconxinpin"
-          }
-        }
-      }
-    ]
-  },
-  {
     path: "/flowChart",
     component: Layout,
     redirect: "/flowChart/index",
@@ -399,6 +256,109 @@ const routes = [
     ]
   },
   {
+    path: "/able",
+    component: Layout,
+    redirect: "/able/watermark",
+    meta: {
+      icon: "ubuntu-fill",
+      title: $t("menus.hsAble"),
+      i18n: true,
+      rank: 4
+    },
+    children: [
+      {
+        path: "/able/watermark",
+        name: "reWatermark",
+        component: () => import("/@/views/able/watermark.vue"),
+        meta: {
+          title: $t("menus.hsWatermark"),
+          i18n: true
+        }
+      },
+      {
+        path: "/able/print",
+        name: "rePrint",
+        component: () => import("/@/views/able/print.vue"),
+        meta: {
+          title: $t("menus.hsPrint"),
+          i18n: true
+        }
+      },
+      {
+        path: "/able/iconSelect",
+        name: "reIconSelect",
+        component: () => import("/@/views/able/icon-select.vue"),
+        meta: {
+          title: $t("menus.hsIconSelect"),
+          i18n: true
+        }
+      },
+      {
+        path: "/able/timeline",
+        name: "reTimeline",
+        component: () => import("/@/views/able/timeline.vue"),
+        meta: {
+          title: $t("menus.hsTimeline"),
+          i18n: true
+        }
+      },
+      {
+        path: "/able/menuTree",
+        name: "reMenuTree",
+        component: () => import("/@/views/able/menu-tree.vue"),
+        meta: {
+          title: $t("menus.hsMenuTree"),
+          i18n: true
+        }
+      },
+      {
+        path: "/able/lineTree",
+        name: "reLineTree",
+        component: () => import("/@/views/able/line-tree.vue"),
+        meta: {
+          title: $t("menus.hsLineTree"),
+          i18n: true
+        }
+      },
+      {
+        path: "/able/antTabs",
+        name: "reAntTabs",
+        component: () => import("/@/views/able/ant-tabs.vue"),
+        meta: {
+          title: $t("menus.hsAntTabs"),
+          i18n: true
+        }
+      },
+      {
+        path: "/able/antAnchor",
+        name: "reAntAnchor",
+        component: () => import("/@/views/able/ant-anchor.vue"),
+        meta: {
+          title: $t("menus.hsAntAnchor"),
+          i18n: true
+        }
+      },
+      {
+        path: "/able/antTreeSelect",
+        name: "reAntTreeSelect",
+        component: () => import("/@/views/able/ant-treeSelect.vue"),
+        meta: {
+          title: $t("menus.hsAntTreeSelect"),
+          i18n: true
+        }
+      },
+      {
+        path: "/able/debounce",
+        name: "reDebounce",
+        component: () => import("/@/views/able/debounce.vue"),
+        meta: {
+          title: $t("menus.hsDebounce"),
+          i18n: true
+        }
+      }
+    ]
+  },
+  {
     path: "/components",
     component: Layout,
     redirect: "/components/video",
@@ -406,19 +366,9 @@ const routes = [
       icon: "menu",
       title: $t("menus.hscomponents"),
       i18n: true,
-      rank: 4
+      rank: 5
     },
     children: [
-      {
-        //标签页组件
-        path: "/components/tabs",
-        name: "tabs",
-        component: () => import("/@/views/components/tabs/index.vue"),
-        meta: {
-          title: $t("menus.hstabList"),
-          i18n: true
-        }
-      },
       {
         path: "/components/video",
         name: "video",
@@ -520,6 +470,80 @@ const routes = [
         meta: {
           title: $t("menus.hscontextmenu"),
           i18n: true
+        }
+      }
+    ]
+  },
+  {
+    path: "/editor",
+    component: Layout,
+    redirect: "/editor/index",
+    meta: {
+      icon: "edit",
+      title: $t("menus.hseditor"),
+      i18n: true,
+      rank: 2
+    },
+    children: [
+      {
+        path: "/editor/index",
+        name: "reEditor",
+        component: () => import("/@/views/editor/index.vue"),
+        meta: {
+          title: $t("menus.hseditor"),
+          i18n: true,
+          keepAlive: true
+        }
+      }
+    ]
+  },
+  {
+    path: "/list",
+    component: Layout,
+    redirect: "/list/card",
+    meta: {
+      icon: "list-check",
+      title: $t("menus.hsList"),
+      i18n: true,
+      rank: 12
+    },
+    children: [
+      {
+        path: "/list/card",
+        name: "listCard",
+        component: () => import("/@/views/list/card/index.vue"),
+        meta: {
+          icon: "card",
+          title: $t("menus.hsListCard"),
+          i18n: true,
+          showParent: true
+        }
+      }
+    ]
+  },
+  {
+    path: "/ppt",
+    component: Layout,
+    redirect: "/ppt/index",
+    meta: {
+      icon: "ppt",
+      title: "PPT",
+      i18n: false,
+      rank: 3
+    },
+    children: [
+      {
+        path: "/ppt/index",
+        name: "reFrameppt",
+        component: IFrame,
+        meta: {
+          title: "PPT",
+          i18n: false,
+          frameSrc: "https://pipipi-pikachu.github.io/PPTist/",
+          extraIcon: {
+            svg: true,
+            name: "team-iconxinpin"
+          }
         }
       }
     ]

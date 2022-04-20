@@ -47,7 +47,7 @@ export default defineComponent({
   name: "epTableProBar",
   props,
   emits: ["refresh"],
-  setup(props, { emit, slots }) {
+  setup(props, { emit, slots, attrs }) {
     const buttonRef = ref();
     const checkList = ref([]);
     const currentWidth = ref(0);
@@ -57,8 +57,7 @@ export default defineComponent({
     const getDropdownItemStyle = computed(() => {
       return s => {
         return {
-          background:
-            s === size.value ? useEpThemeStoreHook().epThemeColor : "",
+          background: s === size.value ? useEpThemeStoreHook().epThemeColor : "",
           color: s === size.value ? "#f4f4f5" : "#000"
         };
       };
@@ -87,22 +86,13 @@ export default defineComponent({
     const dropdown = {
       dropdown: () => (
         <el-dropdown-menu class="translation">
-          <el-dropdown-item
-            style={getDropdownItemStyle.value("large")}
-            onClick={() => (size.value = "large")}
-          >
+          <el-dropdown-item style={getDropdownItemStyle.value("large")} onClick={() => (size.value = "large")}>
             松散
           </el-dropdown-item>
-          <el-dropdown-item
-            style={getDropdownItemStyle.value("default")}
-            onClick={() => (size.value = "default")}
-          >
+          <el-dropdown-item style={getDropdownItemStyle.value("default")} onClick={() => (size.value = "default")}>
             默认
           </el-dropdown-item>
-          <el-dropdown-item
-            style={getDropdownItemStyle.value("small")}
-            onClick={() => (size.value = "small")}
-          >
+          <el-dropdown-item style={getDropdownItemStyle.value("small")} onClick={() => (size.value = "small")}>
             紧凑
           </el-dropdown-item>
         </el-dropdown-menu>
@@ -125,24 +115,19 @@ export default defineComponent({
       <>
         <div
           v-resize
+          {...attrs}
           class="w-99/100 mt-6 p-2 bg-white"
           v-loading={props.loading}
           element-loading-svg={loadingSvg}
           element-loading-svg-view-box="-10, -10, 50, 50"
         >
           <div class="flex justify-between w-full h-60px p-4">
-            <p class="font-bold">
-              {currentWidth.value > 390 ? props.title : "列表"}
-            </p>
+            <p class="font-bold">{currentWidth.value > 390 ? props.title : "列表"}</p>
             <div class="flex items-center justify-around">
               <div class="flex mr-4">{slots?.buttons()}</div>
               {props.tableRef?.size ? (
                 <>
-                  <el-tooltip
-                    effect="dark"
-                    content={isExpandAll.value ? "折叠" : "展开"}
-                    placement="top"
-                  >
+                  <el-tooltip effect="dark" content={isExpandAll.value ? "折叠" : "展开"} placement="top">
                     <IconifyIconOffline
                       class="cursor-pointer outline-none"
                       icon={isExpandAll.value ? "unExpand" : "expand"}
@@ -167,12 +152,7 @@ export default defineComponent({
 
               <el-tooltip effect="dark" content="密度" placement="top">
                 <el-dropdown v-slots={dropdown} trigger="click">
-                  <IconifyIconOffline
-                    class="cursor-pointer outline-none"
-                    icon="density"
-                    width="16"
-                    color="#606266"
-                  />
+                  <IconifyIconOffline class="cursor-pointer outline-none" icon="density" width="16" color="#606266" />
                 </el-dropdown>
               </el-tooltip>
               <el-divider direction="vertical" />

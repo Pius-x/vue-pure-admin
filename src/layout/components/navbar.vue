@@ -16,12 +16,23 @@ import globalization from "/@/assets/svg/globalization.svg?component";
 const route = useRoute();
 const { locale, t } = useI18n();
 const instance = getCurrentInstance().appContext.config.globalProperties.$storage;
-const { logout, onPanel, changeTitle, toggleSideBar, pureApp, username, avatarsStyle, getDropdownItemStyle } = useNav();
+const {
+  logout,
+  onPanel,
+  changeTitle,
+  toggleSideBar,
+  pureApp,
+  username,
+  avatarsStyle,
+  getDropdownItemStyle,
+  changeWangeditorLanguage
+} = useNav();
 
 watch(
   () => locale.value,
   () => {
     changeTitle(route.meta);
+    locale.value === "en" ? changeWangeditorLanguage(locale.value) : changeWangeditorLanguage("zh-CN");
   }
 );
 
