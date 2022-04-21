@@ -1,8 +1,8 @@
 <template>
   <div>
     <el-tabs v-model="curView" type="border-card">
-      <el-tab-pane v-for="(label, key) in tabList" :label="label" :key="key" :name="key" />
-      //动态组件变化时不会销毁组件
+      <el-tab-pane v-for="item in tabList" :label="item.label" :key="item.key" :name="item.key" />
+      <!--      动态组件变化时不会销毁组件-->
       <!--      <keep-alive>-->
       <component :is="curView" />
       <!--      </keep-alive>-->
@@ -12,26 +12,25 @@
 
 <script lang="ts">
 import draggable from "./subview/draggable.vue";
-import mapComp from "./subview/map.vue";
+import myHome from "./subview/home.vue";
 import videoComp from "./subview/video.vue";
-import { ref, computed } from "vue";
+import { ref } from "vue";
 
 export default {
   components: {
     draggable,
-    mapComp,
+    myHome,
     videoComp
   },
 
   setup() {
-    const curView = ref("draggable");
-    const tabList = computed(() => {
-      return {
-        draggable: "拖拽列表",
-        mapComp: "地图",
-        videoComp: "视频"
-      };
-    });
+    const tabList: { key: string; label: string }[] = [
+      { key: "myHome", label: "主页" },
+      { key: "draggable", label: "拖拽列表" },
+      { key: "videoComp", label: "视频" }
+    ];
+
+    const curView = ref(tabList[0]["key"]);
 
     return {
       curView,
