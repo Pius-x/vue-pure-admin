@@ -14,12 +14,14 @@
 import draggable from "./subview/draggable.vue";
 import myHome from "./subview/home.vue";
 import videoComp from "./subview/video.vue";
+import starRate from "./subview/starRate.vue";
 import { ref } from "vue";
 
 const tabList: { component: any; label: string }[] = [
   { component: myHome, label: "主页" },
   { component: draggable, label: "拖拽列表" },
-  { component: videoComp, label: "视频" }
+  { component: videoComp, label: "视频" },
+  { component: starRate, label: "星星评分" }
 ];
 
 const curView = ref(0);
